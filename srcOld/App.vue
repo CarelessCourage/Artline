@@ -1,18 +1,17 @@
 <template>
   <navBurger />
-  <intro />
-  <box v-if="false"/>
-  <artickleVue v-if="true"/>
-
+  <div>
+    <intro />
+    <artickleVue />
+  </div>
 </template>
 
 <script setup>
 export { default as navBurger } from "./components/navBurger";
 export { default as intro } from "./components/intro";
 export { default as artickleVue } from "./components/artickle";
-export { default as box } from "./components/box";
 
-//import LocomotiveScroll from "locomotive-scroll";
+import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.min.css";
 
 export default {
@@ -21,6 +20,13 @@ export default {
     return {
       lms: null,
     };
+  },
+  mounted() {
+    this.lms = new LocomotiveScroll({
+      el: document.querySelector("#smoothscroll"),
+      smooth: true,
+    });
+    console.log("lmS", this.lmS);
   },
 };
 </script>
@@ -67,12 +73,12 @@ h1 {
 
 h2 {
   font-family: "Noto Serif", serif, "Roboto", sans-sedrif;
-  font-size: clamp(10px, 2vw, 2em);
+  font-size: clamp(30px, 3vw, 8em);
 }
 
 p {
   font-family: "Noto Serif", serif, "Roboto", sans-sedrif;
-  font-size: clamp(12px, 2vw, 1.5em);
+  font-size: clamp(12px, 2vw, 3em);
 }
 
 ul {

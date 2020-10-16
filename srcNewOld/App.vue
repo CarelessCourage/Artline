@@ -2,7 +2,11 @@
   <navBurger />
   <intro />
   <box v-if="false"/>
-  <artickleVue v-if="true"/>
+  <artickleVue count="one" title="Title" date="1884-1994" image="https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg"/>
+  <artickleVue count="two" right="true" title="Title" date="1884-1994" image="https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg"/>
+  <artickleVue count="three" title="Title" date="1884-1994" image="https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg"/>
+  <artickleVue count="four" title="Title" date="1884-1994" image="https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg"/>
+
 
 </template>
 
@@ -67,7 +71,7 @@ h1 {
 
 h2 {
   font-family: "Noto Serif", serif, "Roboto", sans-sedrif;
-  font-size: clamp(10px, 2vw, 2em);
+  font-size: clamp(30px, 3vw, 8em);
 }
 
 p {
