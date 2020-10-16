@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 export { default as page } from "./page";
 
 import gsap from "gsap";

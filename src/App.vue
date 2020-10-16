@@ -1,22 +1,27 @@
 <template>
   <navBurger />
   <intro />
-  <box v-if="false"/>
-  <artickleVue v-if="true"/>
-
+  <box v-if="false" />
+  <artickleVue v-if="true" />
 </template>
 
-<script setup>
-export { default as navBurger } from "./components/navBurger";
-export { default as intro } from "./components/intro";
-export { default as artickleVue } from "./components/artickle";
-export { default as box } from "./components/box";
+<script>
+import navBurger from "./components/navBurger";
+import intro from "./components/intro";
+import artickleVue from "./components/artickle";
+import box from "./components/box";
 
 //import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.min.css";
 
 export default {
   name: "app",
+  components: {
+    navBurger,
+    intro,
+    artickleVue,
+    box,
+  },
   data() {
     return {
       lms: null,
