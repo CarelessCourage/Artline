@@ -1,31 +1,37 @@
 <template>
-  <div :ref="setItemRef" class="titleBox" :class="{expanded: mode}" v-for="(art, index) in artickles" :key="index">
+  <div
+    :ref="setItemRef"
+    class="titleBox"
+    :class="{ expanded: mode, classic: !mode }"
+    v-for="(art, index) in artickles"
+    :key="index"
+  >
     <div class="box">
-      <div class="text">
-        <h1>{{art.title}}</h1>
-        <h2>{{art.date}}</h2>
+      <div class="text" :class="{extra: art.title == 'Punk New Wave'}">
+        <h1 :style="art.font">{{ art.title }}</h1>
+        <h2>{{ art.date }}</h2>
       </div>
       <div class="imgFrame">
-        <img :src="art.image" @click="changeMode($event.currentTarget)">
+        <img :style="art.top" :src="art.image" @click="changeMode($event.currentTarget)" />
       </div>
     </div>
+
     <transition name="enterPar">
-      <p v-if="true" class="paralax" v-show="!mode" data-speed=".2">{{art.content}}</p>
+      <div v-show="!mode" data-speed=".2" class="paralax">
+        <h2 style="color: var(--special)">{{art.title}}</h2>
+        <p >{{ art.hook }}</p>
+      </div>
     </transition>
-    <div class="art">
-      <transition name="enter">
-        <p v-if="mode">{{art.content}}</p>
-      </transition>
-      <transition name="enter">
-        <p v-if="mode">{{art.content}}</p>
-      </transition>
-      <transition name="enter">
-        <p v-if="mode">{{art.content}}</p>
-      </transition>
-      <transition name="enter">
-        <p v-if="mode">{{art.content}}</p>
-      </transition>
-      <button v-if="false">Read More</button>
+
+    <div class="art" v-if="mode">
+        <p class="intro" >{{ art.intro }}</p>
+        <img :src="art.subimg"/>
+        <div class="contentWrapper">
+          <div class="content" v-for="(paragraph, index) in art.content"
+          :key="index">
+            <p>{{ paragraph.source }}</p>
+          </div>
+        </div>
     </div>
 
   </div>
@@ -35,32 +41,32 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default {
   name: "intro",
-  data: function() {
+  computed: {
+     assetsPath: function(file) {
+         return 'assets/' + file +'.png';
+     },
+     artickles () {
+       return this.$store.state.artickles
+     },
+     active () {
+       return this.$store.state.active
+     },
+     mode () {
+       return this.$store.state.mode
+     }
+  },
+  data: function () {
     return {
-      mode: false,
       syncScroll: {
         timer: 0,
         el: null,
       },
       itemRefs: [],
-      artickles: [
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-        {image: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg", title: "Title", date: "1895-1867", content: "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho"},
-      ]
-    }
+    };
   },
   mounted() {
     ScrollTrigger.defaults({
@@ -70,20 +76,25 @@ export default {
   },
   methods: {
     changeMode(el) {
-      this.mode = !this.mode
-      let target = el.parentElement.parentElement
-      var interval = setInterval(function(){
-          console.log("hfjhdsjhsdf");
-          gsap.to(window, {duration: .01, scrollTo: {y: target, offsetY: 200, autoKill: false}});
+      this.$store.commit('modeChange');
+      let target = el.parentElement.parentElement;
+      var interval = setInterval(function () {
+        console.log("hfjhdsjhsdf");
+        gsap.to(window, {
+          duration: 0.01,
+          scrollTo: { y: target, offsetY: 200, autoKill: false },
+        });
       }, 0.1);
-      setTimeout(() => {  clearInterval(interval); }, 2000);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 2000);
     },
     startAnimation() {
       this.itemRefs.forEach((el) => {
         gsap.from(el.querySelector(".box"), {
           scrollTrigger: {
             trigger: el,
-            start: "top bottom"
+            start: "top bottom",
           },
           x: "0px",
           ease: "none",
@@ -91,22 +102,21 @@ export default {
         gsap.to(el.querySelector(".paralax"), {
           scrollTrigger: {
             trigger: el,
-            scrub: 1
+            scrub: 1,
           },
-          y: (i, target) => (-ScrollTrigger.maxScroll(window) * target.dataset.speed) / 2,
+          y: (i, target) =>
+            (-ScrollTrigger.maxScroll(window) * target.dataset.speed) / 2,
           ease: "none",
         });
-
       });
-
     },
     setItemRef(el) {
-      this.itemRefs.push(el)
-    }
+      this.itemRefs.push(el);
+    },
   },
   beforeUpdate() {
-    this.itemRefs = []
-  }
+    this.itemRefs = [];
+  },
 };
 </script>
 
@@ -123,12 +133,11 @@ button {
   font-family: "Kaoly", "Noto Serif", serif, "Roboto", sans-sedrif;
   color: var(--special);
   cursor: pointer;
-  opacity: .5;
+  opacity: 0.5;
   &:hover {
     opacity: 1;
   }
 }
-
 
 .titleBox.expanded {
   width: 100%;
@@ -136,21 +145,75 @@ button {
   max-height: 20em;
   max-height: 400em;
   //temp
-  margin-top: 10em;
+  margin-top: 25vw;
+  .imgFrame {
+    transition: .4s;
+    img {
+      transition: .4s;
+      opacity: 1;
+      &:hover {
+        opacity: 1;
+        width: 100%;
+      }
+    }
+    &:hover {
+      background: var(--special);
+      img {
+        opacity: .5;
+      }
+    }
+  }
   .text {
-    transform: translateY(-220px);
+    transform: translateY(-270px);
+    @media only screen and (max-width: 1300px) {
+      transform: translateY(-200px);
+      &.extra {
+        transform: translateY(-220px);
+      }
+    }
   }
   .art {
     width: 45em;
     max-width: 100vw;
     margin: auto;
     padding: 2em;
-    padding-top: .5em;
-    padding-bottom: .5em;
+    padding-bottom: 0.5em;
     box-sizing: border-box;
+    img {
+        width: 100%;
+        height: 15em;
+        background: blue;
+      }
     p {
       margin-top: 0px;
       overflow: hidden;
+    }
+    .intro {
+      width: 25em;
+      max-width: 100%;
+      //font-weight: bold;
+      padding-bottom: 2em;
+      padding-top: 1em;
+      @media only screen and (max-width: 450px) {
+        width: 100%;
+      }
+    }
+    .contentWrapper {
+        // this doesnt work for some fucking reason ... no time to fix. look at later...
+        //padding-bottom: 20em;
+
+        .content {
+          width: 25em;
+          max-width: 100%;
+          float: right;
+          padding-top: 2em;
+          &:nth-last-of-type(1) {
+            padding-bottom: 10vw;
+          }
+          @media only screen and (max-width: 450px) {
+            width: 100%;
+          }
+        }
     }
   }
   .box {
@@ -160,8 +223,10 @@ button {
   img {
     opacity: 1;
   }
+  h2 {
+    color: var(--details);
+  }
 }
-
 
 .titleBox {
   width: 30em;
@@ -202,52 +267,79 @@ button {
     width: 100%;
     position: absolute;
     z-index: -1;
-    opacity: .2;
     top: 0px;
     left: 0px;
     cursor: pointer;
-    transition: opacity .4s ease-in;
+    transition: opacity 0.4s ease-in;
     overflow: hidden;
     display: flex;
     justify-content: center;
-    &:hover img {
-      width: 200%;
+    background: var(--details);
+  }
+  &.classic:hover {
+    .box .text h1 {
+      font-size: 8em;
+      //font-family: "Noto Serif", serif, "Roboto", sans-sedrif !important;
+    }
+    .imgFrame {
+      //opacity: .6;
+      img {
+        width: 130%;
+        height: 130%;
+      }
     }
   }
   img {
-    transition: .4s;
+    opacity: 0.5;
+    transition: 0.8s;
     width: 100%;
+    object-fit: cover;
+  }
+  &.classic img {
     height: 100%;
-    object-fit: cover
   }
   h1 {
     color: var(--special);
+    font-family: 'Dancing Script';
+    transition: .4s;
   }
-  h1, h2 {
+  h1,
+  h2 {
     text-align: center;
   }
   h2 {
-    margin-top: clamp(-70px, 5vw, -20px);
+    transition: color .4s;
+    margin-top: -.5vw;
+    color: var(--bg);
+    opacity: .8
   }
-  p.paralax {
+  .paralax {
+    width: 25em;
     position: absolute;
     left: -25vw;
     bottom: -300px;
     background: var(--bg);
     padding: 2em;
+    pointer-events: none;
+    @media only screen and (max-width: 880px) {
+      display: none;
+    }
+    p {
+      font-size: clamp(15px, 1vw, 2em);
+    }
   }
-  &:nth-child(odd) p  {
+  &:nth-child(odd) .paralax {
     left: auto;
     right: -25vw;
   }
 }
 
 .enterPar-leave-active {
-  animation: enterPar 0.5s cubic-bezier(1.0, 0.5, 0.8, 1.0) reverse;
+  animation: enterPar 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
 }
 
 .enterPar-enter-active {
-  animation: enterPar 0.5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  animation: enterPar 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 @keyframes enterPar {
@@ -262,11 +354,11 @@ button {
 }
 
 .enter-leave-active {
-  animation: enterMenu 0.5s cubic-bezier(1.0, 0.5, 0.8, 1.0) reverse;
+  animation: enterMenu 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
 }
 
 .enter-enter-active {
-  animation: enterMenu 0.5s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  animation: enterMenu 0.5s cubic-bezier(1, 0.5, 0.8, 1);
 }
 
 @keyframes enterMenu {

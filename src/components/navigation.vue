@@ -1,11 +1,11 @@
 <template>
   <div id="nav">
     <div class="other"></div>
-    <router-link to="/"><p>a</p></router-link>
-    <router-link to="/about"><p>a</p></router-link>
-    <router-link to="/about"><p>a</p></router-link>
-    <router-link to="/about"><p>a</p></router-link>
-    <router-link to="/about"><p>a</p></router-link>
+
+    <div v-for="(letter, index) in letters" class="letter" :class="{active: active == letter.title}" @click="$store.commit('activeChange', letter.title)" :key="index">
+      <p :style="letter.font">A</p>
+    </div>
+
     <svg class="svgFilter" xmlns="http://www.w3.org/2000/svg" version="1.1">
       <defs>
         <filter id="goo">
@@ -29,6 +29,17 @@ export default {
   props: {
     msg: String,
   },
+  computed: {
+    letters () {
+      return this.$store.state.artickles
+    },
+    active () {
+      return this.$store.state.active
+    },
+    mode () {
+      return this.$store.state.mode
+    }
+  }
 };
 </script>
 
@@ -40,6 +51,7 @@ export default {
 }
 
 #nav {
+  --thickness: 3em;
   height: 4vw;
   width: 100vw;
   left: 0px;
@@ -48,39 +60,61 @@ export default {
   display: flex;
   flex-direction: row;
   position: fixed;
-  z-index: 1;
+  z-index: 100;
   filter: url("#goo");
-  p {
-    //margin: 0px;
+  @media only screen and (min-width: 900px) {
+    height: 100vh;
+    width: 4vw;
+    min-width: var(--thickness);
+    flex-direction: column;
+    &.letter:after {
+      top: 0em;
+      right: 0em;
+      left: 0em;
+      bottom: 0em;
+    }
+    .letter.active {
+      color: var(--special);
+      &::after {
+        top: 0em;
+        transform: translateX(1em);
+      }
+    }
   }
-  a {
+  @media only screen and (max-width: 901px) {
+    min-height: var(--thickness);
+    &.letter:after {
+      top: 0em;
+    }
+    .letter.active {
+      color: var(--special);
+      &::after {
+        transform: translateY(-1em);
+      }
+    }
+  }
+  .letter {
     display: flex;
     justify-content: center;
     align-items: center;
     font-weight: bold;
     color: var(--bg);
-    //height: 4em;
     width: 100%;
     text-decoration: none;
     position: relative;
     z-index: 0;
+    cursor: pointer;
     &::after {
       z-index: -1;
-      transition: 0.4s cubic-bezier(0.71, 0.05, 0.37, 2.2);
+      //z-index: 500;
+      transition: .8s cubic-bezier(0.71, 0.05, 0.37, 2.2);
       content: "";
       position: absolute;
-      top: -0em;
       width: 3em;
       height: 3em;
       border-radius: 50%;
       background: var(--details);
-    }
-
-    &.router-link-exact-active {
-      color: var(--special);
-      &::after {
-        top: -1em;
-      }
+      //background: blue;
     }
   }
 }
