@@ -1,8 +1,22 @@
 <template>
   <div id="nav">
-    <div class="other"></div>
+    <svg id="menu" viewBox="0 0 51.79 331.65">
+      <title>start</title>
+      <path
+        id="start"
+        class="cls-1"
+        d="M0,0H25.87c70.3,127.56-27.77,168.94,0,331.65H0Z"
+      />
+    </svg>
 
-    <div v-for="(letter, index) in letters" class="letter" :class="{active: active == letter.title}" @click="$store.commit('activeChange', letter.title)" :key="index">
+    <div
+      id="letters"
+      v-for="(letter, index) in letters"
+      class="letter"
+      :class="{ active: active == letter.title }"
+      @click="letterClicked(letter.title)"
+      :key="index"
+    >
       <p :style="letter.font">A</p>
     </div>
 
@@ -24,27 +38,67 @@
 </template>
 
 <script>
+import { gsap } from "gsap";
+
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+  name: "navigation",
+  methods: {
+    letterClicked(title) {
+      //this.$store.commit("titleChange", title);
+      let el = document.getElementById(title);
+      this.$store.dispatch("artickleClicked", { el: el, toggle: false });
+    },
   },
   computed: {
-    letters () {
-      return this.$store.state.artickles
+    letters() {
+      return this.$store.state.artickles;
     },
-    active () {
-      return this.$store.state.active
+    active() {
+      return this.$store.state.active;
     },
-    mode () {
-      return this.$store.state.mode
-    }
-  }
+    mode() {
+      return this.$store.state.mode;
+    },
+  },
+  mounted() {
+    var tl = gsap.timeline();
+
+    tl.to("#start", 3, {
+      attr: {
+        d: "M0,0H25.87c-27.77,91.28,45.93,192.76,0,331.65H0Z",
+      },
+      ease: "elastic.out(1, 0.3)",
+    }).to(
+      "path#start",
+      3,
+      {
+        attr: {
+          d: "M0,0H25.87c0,1.31.09,331.13,0,331.65H0Z",
+        },
+        ease: "elastic.out(1, 0.3)",
+      },
+      "-=3"
+    );
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+svg#menu {
+  height: 100%;
+  position: absolute;
+  height: 100vh;
+  min-width: 8.8em;
+  //background: blue;
+  transform: scaleX(0.69);
+  transform-origin: left;
+  //width: 3em;
+  path {
+    fill: var(--details);
+  }
+}
+
 .svgFilter {
   position: absolute;
   pointer-events: none;
@@ -54,9 +108,9 @@ export default {
   --thickness: 3em;
   height: 4vw;
   width: 100vw;
+  background-color: var(--details);
   left: 0px;
   bottom: 0px;
-  background-color: var(--details);
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -64,9 +118,19 @@ export default {
   filter: url("#goo");
   @media only screen and (min-width: 900px) {
     height: 100vh;
-    width: 4vw;
-    min-width: var(--thickness);
+    max-width: 5vw;
+    width: 3em;
+    //min-width: var(--thickness);
+    background-color: transparent;
     flex-direction: column;
+    &:after {
+      content: "";
+      background: var(--details);
+      height: 100%;
+      width: 50%;
+      position: absolute;
+      z-index: -1;
+    }
     &.letter:after {
       top: 0em;
       right: 0em;
@@ -107,7 +171,7 @@ export default {
     &::after {
       z-index: -1;
       //z-index: 500;
-      transition: .8s cubic-bezier(0.71, 0.05, 0.37, 2.2);
+      transition: 0.8s cubic-bezier(0.71, 0.05, 0.37, 2.2);
       content: "";
       position: absolute;
       width: 3em;

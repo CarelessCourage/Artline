@@ -5,35 +5,44 @@
     :class="{ expanded: mode, classic: !mode }"
     v-for="(art, index) in artickles"
     :key="index"
+    :id="art.title"
+    @click="
+      $store.dispatch('artickleClicked', {
+        el: $event.currentTarget,
+        toggle: true,
+      })
+    "
   >
     <div class="box">
-      <div class="text" :class="{extra: art.title == 'Punk New Wave'}">
+      <div class="text" :class="{ extra: art.title == 'Punk New Wave' }">
         <h1 :style="art.font">{{ art.title }}</h1>
         <h2>{{ art.date }}</h2>
       </div>
       <div class="imgFrame">
-        <img :style="art.top" :src="art.image" @click="changeMode($event.currentTarget)" />
+        <img :style="art.top" :src="art.image" />
       </div>
     </div>
 
     <transition name="enterPar">
       <div v-show="!mode" data-speed=".2" class="paralax">
-        <h2 style="color: var(--special)">{{art.title}}</h2>
-        <p >{{ art.hook }}</p>
+        <h2 style="color: var(--special)">{{ art.title }}</h2>
+        <p>{{ art.hook }}</p>
       </div>
     </transition>
 
     <div class="art" v-if="mode">
-        <p class="intro" >{{ art.intro }}</p>
-        <img :src="art.subimg"/>
-        <div class="contentWrapper">
-          <div class="content" v-for="(paragraph, index) in art.content"
-          :key="index">
-            <p>{{ paragraph.source }}</p>
-          </div>
+      <p class="intro">{{ art.intro }}</p>
+      <img :src="art.subimg" />
+      <div class="contentWrapper">
+        <div
+          class="content"
+          v-for="(paragraph, index) in art.content"
+          :key="index"
+        >
+          <p>{{ paragraph.source }}</p>
         </div>
+      </div>
     </div>
-
   </div>
 </template>
 
@@ -46,62 +55,33 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "intro",
   computed: {
-     assetsPath: function(file) {
-         return 'assets/' + file +'.png';
-     },
-     artickles () {
-       return this.$store.state.artickles
-     },
-     active () {
-       return this.$store.state.active
-     },
-     mode () {
-       return this.$store.state.mode
-     }
-  },
-  data: function () {
-    return {
-      syncScroll: {
-        timer: 0,
-        el: null,
-      },
-      itemRefs: [],
-    };
+    assetsPath: function (file) {
+      return "assets/" + file + ".png";
+    },
+    artickles() {
+      return this.$store.state.artickles;
+    },
+    active() {
+      return this.$store.state.active;
+    },
+    mode() {
+      return this.$store.state.mode;
+    },
   },
   mounted() {
     ScrollTrigger.defaults({
       toggleActions: "restart pause resume none",
     });
-    this.startAnimation();
+    this.startParalax();
+    this.$store.dispatch("_resetGSAP");
   },
   methods: {
-    changeMode(el) {
-      this.$store.commit('modeChange');
-      let target = el.parentElement.parentElement;
-      var interval = setInterval(function () {
-        console.log("hfjhdsjhsdf");
-        gsap.to(window, {
-          duration: 0.01,
-          scrollTo: { y: target, offsetY: 200, autoKill: false },
-        });
-      }, 0.1);
-      setTimeout(() => {
-        clearInterval(interval);
-      }, 2000);
-    },
-    startAnimation() {
-      this.itemRefs.forEach((el) => {
-        gsap.from(el.querySelector(".box"), {
-          scrollTrigger: {
-            trigger: el,
-            start: "top bottom",
-          },
-          x: "0px",
-          ease: "none",
-        });
+    startParalax() {
+      this.$store.state.itemRefs.forEach((el) => {
         gsap.to(el.querySelector(".paralax"), {
           scrollTrigger: {
             trigger: el,
+            id: "paralax",
             scrub: 1,
           },
           y: (i, target) =>
@@ -111,11 +91,11 @@ export default {
       });
     },
     setItemRef(el) {
-      this.itemRefs.push(el);
+      this.$store.commit("pushRef", el);
     },
   },
   beforeUpdate() {
-    this.itemRefs = [];
+    this.$store.commit("resetRef");
   },
 };
 </script>
@@ -147,9 +127,9 @@ button {
   //temp
   margin-top: 25vw;
   .imgFrame {
-    transition: .4s;
+    transition: 0.4s;
     img {
-      transition: .4s;
+      transition: 0.4s;
       opacity: 1;
       &:hover {
         opacity: 1;
@@ -159,7 +139,7 @@ button {
     &:hover {
       background: var(--special);
       img {
-        opacity: .5;
+        opacity: 0.5;
       }
     }
   }
@@ -180,10 +160,10 @@ button {
     padding-bottom: 0.5em;
     box-sizing: border-box;
     img {
-        width: 100%;
-        height: 15em;
-        background: blue;
-      }
+      width: 100%;
+      height: 15em;
+      background: blue;
+    }
     p {
       margin-top: 0px;
       overflow: hidden;
@@ -199,21 +179,21 @@ button {
       }
     }
     .contentWrapper {
-        // this doesnt work for some fucking reason ... no time to fix. look at later...
-        //padding-bottom: 20em;
+      // this doesnt work for some fucking reason ... no time to fix. look at later...
+      //padding-bottom: 20em;
 
-        .content {
-          width: 25em;
-          max-width: 100%;
-          float: right;
-          padding-top: 2em;
-          &:nth-last-of-type(1) {
-            padding-bottom: 10vw;
-          }
-          @media only screen and (max-width: 450px) {
-            width: 100%;
-          }
+      .content {
+        width: 25em;
+        max-width: 100%;
+        float: right;
+        padding-top: 2em;
+        &:nth-last-of-type(1) {
+          padding-bottom: 10vw;
         }
+        @media only screen and (max-width: 450px) {
+          width: 100%;
+        }
+      }
     }
   }
   .box {
@@ -236,6 +216,7 @@ button {
   margin-top: 0em;
   margin-bottom: 0em;
   transition: 2s;
+  cursor: pointer;
   &.inView {
     //max-height: 200em;
     background-color: red;
@@ -300,18 +281,18 @@ button {
   }
   h1 {
     color: var(--special);
-    font-family: 'Dancing Script';
-    transition: .4s;
+    font-family: "Dancing Script";
+    transition: 0.4s;
   }
   h1,
   h2 {
     text-align: center;
   }
   h2 {
-    transition: color .4s;
-    margin-top: -.5vw;
+    transition: color 0.4s;
+    margin-top: -0.5vw;
     color: var(--bg);
-    opacity: .8
+    opacity: 0.8;
   }
   .paralax {
     width: 25em;

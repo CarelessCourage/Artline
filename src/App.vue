@@ -1,5 +1,7 @@
 <template>
-  <navigation v-if="false"/>
+  <transition name="nav">
+    <navigation v-if="$store.state.nav && $store.state.mode" />
+  </transition>
   <intro />
   <gate />
   <box v-if="false" />
@@ -9,6 +11,10 @@
 </template>
 
 <script>
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 import navigation from "./components/navigation";
 import intro from "./components/intro";
 import artickleVue from "./components/artickle";
@@ -25,7 +31,7 @@ export default {
     intro,
     artickleVue,
     box,
-    gate
+    gate,
   },
   data() {
     return {
@@ -38,30 +44,29 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Press+Start+2P&family=Special+Elite&family=Vampiro+One&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Press+Start+2P&family=Special+Elite&family=Vampiro+One&display=swap");
 
 //font-family: 'Dancing Script', cursive;
 //font-family: 'Press Start 2P', cursive;
 //font-family: 'Special Elite', cursive;
 //font-family: 'Vampiro One', cursive;
 
-
 @font-face {
-    font-family: 'psy';
-    src: url('assets/fonts/psychedelic/flames-lwzg-webfont.woff2') format('woff2'),
-         url('assets/fonts/psychedelic/flames-lwzg-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-
+  font-family: "psy";
+  src: url("assets/fonts/psychedelic/flames-lwzg-webfont.woff2") format("woff2"),
+    url("assets/fonts/psychedelic/flames-lwzg-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'swiss';
-    src: url('assets/fonts/swiss/swis721_blk_bt_black_italic-webfont.woff2') format('woff2'),
-         url('assets/fonts/swiss/swis721_blk_bt_black_italic-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "swiss";
+  src: url("assets/fonts/swiss/swis721_blk_bt_black_italic-webfont.woff2")
+      format("woff2"),
+    url("assets/fonts/swiss/swis721_blk_bt_black_italic-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
@@ -74,27 +79,30 @@ export default {
 }
 
 @font-face {
-    font-family: 'victorian';
-    src: url('assets/fonts/victorian/victoriandecadedemoversion-2o7ml-webfont.woff2') format('woff2'),
-         url('assets/fonts/victorian/victoriandecadedemoversion-2o7ml-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "victorian";
+  src: url("assets/fonts/victorian/victoriandecadedemoversion-2o7ml-webfont.woff2")
+      format("woff2"),
+    url("assets/fonts/victorian/victoriandecadedemoversion-2o7ml-webfont.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'bauhaus';
-    src: url('assets/fonts/bauhaus/bauhaussketch-k1j7-webfont.woff2') format('woff2'),
-         url('assets/fonts/bauhaus/bauhaussketch-k1j7-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "bauhaus";
+  src: url("assets/fonts/bauhaus/bauhaussketch-k1j7-webfont.woff2")
+      format("woff2"),
+    url("assets/fonts/bauhaus/bauhaussketch-k1j7-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'artdeco';
-    src: url('assets/fonts/artdeco/dkotago-addr-webfont.woff2') format('woff2'),
-         url('assets/fonts/artdeco/dkotago-addr-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "artdeco";
+  src: url("assets/fonts/artdeco/dkotago-addr-webfont.woff2") format("woff2"),
+    url("assets/fonts/artdeco/dkotago-addr-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 .artickles {
@@ -185,5 +193,22 @@ section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.nav-leave-active {
+  animation: nav 0.5s reverse;
+}
+
+.nav-enter-active {
+  animation: nav 0.5s;
+}
+
+@keyframes nav {
+  0% {
+    transform: translateX(-100px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 </style>
