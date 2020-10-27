@@ -149,6 +149,7 @@ export default {
   border-radius: 50%;
   opacity: 0.7;
   position: fixed;
+  position: absolute;
   z-index: 20;
   bottom: 50px;
   left: 0px;
@@ -162,6 +163,9 @@ export default {
   flex-direction: column;
   transition: opacity 0.4s;
   cursor: pointer;
+  @media only screen and (max-width: 900px) {
+    position: absolute;
+  }
   &:hover {
     opacity: 1 !important;
   }

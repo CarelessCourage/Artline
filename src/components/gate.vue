@@ -1,6 +1,6 @@
 <template>
   <div class="bugFix">
-    <div class="gate">
+    <div :class="triggerClass" class="gateContainer">
       <div v-if="false" class="cubers"></div>
       <svg
         class="svgGate"
@@ -450,30 +450,62 @@ gsap.registerPlugin(ScrollTrigger, ExpoScaleEase, TweenMax, Power2);
 
 export default {
   name: "gate",
+  props: {
+    enter: {
+      type: Boolean,
+      default: true,
+    },
+    triggerClass: {
+      type: String,
+      default: "gate",
+    },
+  },
   data: function () {
     return {};
   },
   mounted() {
-    this.startAnimation();
+    if (this.enter) {
+      this.startAnimationToo();
+    } else {
+      console.log("gets triggered");
+      this.startAnimationFrom();
+    }
   },
   methods: {
-    startAnimation() {
-      let tooo = gsap.timeline({
+    startAnimationToo() {
+      let tlOne = gsap.timeline({
         scrollTrigger: {
-          trigger: ".gate",
+          trigger: "." + this.triggerClass,
           start: "top 20%",
-          end: "300% top",
+          end: "1200% top",
           toggleActions: "restart none reverse none",
           pin: true,
           scrub: true,
-          id: "gate",
+          id: this.triggerClass,
         },
       });
 
-      tooo.to(".svgGate", {
+      tlOne.to(".svgGate", {
         scale: "30",
         ease: ExpoScaleEase.config(0.5, 3, Power2.easeInOut),
-        duration: 4,
+      });
+    },
+    startAnimationFrom() {
+      let tlTwo = gsap.timeline({
+        scrollTrigger: {
+          trigger: "." + this.triggerClass,
+          start: "top 20%",
+          end: "1200% top",
+          toggleActions: "restart none reverse none",
+          pin: true,
+          scrub: true,
+          id: this.triggerClass,
+        },
+      });
+
+      tlTwo.from(".svgGate", {
+        scale: "30",
+        ease: ExpoScaleEase.config(0.5, 3, Power2.easeInOut),
       });
     },
   },
@@ -484,10 +516,11 @@ export default {
 <style scoped lang="scss">
 .bugFix {
   position: relative;
-  height: 130vh;
+  height: 230vh;
   background: var(--details);
+  overflow: hidden;
 }
-.gate {
+.gateContainer {
   //background: blue;
   display: flex;
   justify-content: center;

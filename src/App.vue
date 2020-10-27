@@ -5,7 +5,7 @@
   </transition>
 
   <intro />
-  <gate v-if="true" />
+  <gate v-if="true" :enter="true" />
 
   <section class="artickles">
     <artickleVue v-if="true" />
@@ -116,7 +116,7 @@ export default {
   background: var(--bg);
   position: relative;
   z-index: 10;
-  padding-bottom: 50em;
+  //padding-bottom: 50em;
 }
 
 .sticky {
@@ -181,6 +181,7 @@ ul {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--details);
+  overflow: hidden;
 }
 
 .titleBox {
