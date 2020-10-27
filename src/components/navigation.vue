@@ -120,7 +120,6 @@ svg#menu {
     height: 100vh;
     max-width: 5vw;
     width: 3em;
-    //min-width: var(--thickness);
     background-color: transparent;
     flex-direction: column;
     &:after {

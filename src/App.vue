@@ -1,21 +1,27 @@
 <template>
+  <toggleEye v-if="false" />
   <transition name="nav">
     <navigation v-if="$store.state.nav && $store.state.mode" />
   </transition>
+
   <intro />
-  <gate />
-  <box v-if="false" />
+  <gate v-if="true" />
+
   <section class="artickles">
     <artickleVue v-if="true" />
   </section>
+
+  <box v-if="false" />
 </template>
 
 <script>
+//v-if="$store.state.nav && $store.state.mode"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import navigation from "./components/navigation";
+import toggleEye from "./components/toggleEye";
 import intro from "./components/intro";
 import artickleVue from "./components/artickle";
 import box from "./components/box";
@@ -28,6 +34,7 @@ export default {
   name: "app",
   components: {
     navigation,
+    toggleEye,
     intro,
     artickleVue,
     box,
@@ -134,11 +141,15 @@ export default {
   --clr: #b7c9e5;
 }
 
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 html {
   background: var(--special);
   max-width: 100vw;
-  overflow-x: hidden;
-  //padding-bottom: 170vw;
 }
 
 body {
@@ -196,19 +207,33 @@ section {
 }
 
 .nav-leave-active {
-  animation: nav 0.5s reverse;
+  animation: navBottom 0.5s reverse;
+  @media only screen and (min-width: 900px) {
+    animation: navSide 0.5s reverse;
+  }
 }
 
 .nav-enter-active {
-  animation: nav 0.5s;
+  animation: navBottom 0.5s;
+  @media only screen and (min-width: 900px) {
+    animation: navSide 0.5s;
+  }
 }
 
-@keyframes nav {
+@keyframes navSide {
   0% {
     transform: translateX(-100px);
   }
   100% {
     transform: translateX(0);
+  }
+}
+@keyframes navBottom {
+  0% {
+    transform: translateY(100px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 </style>

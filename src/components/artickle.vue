@@ -234,6 +234,12 @@ button {
     box-sizing: border-box;
     position: relative;
     transition: height 2s;
+    @media only screen and (max-width: 870px) {
+      height: 10em;
+      img {
+        opacity: 0.1;
+      }
+    }
   }
   .text {
     transition: transform 1s;
@@ -258,15 +264,17 @@ button {
     background: var(--details);
   }
   &.classic:hover {
-    .box .text h1 {
-      font-size: 8em;
-      //font-family: "Noto Serif", serif, "Roboto", sans-sedrif !important;
-    }
-    .imgFrame {
-      //opacity: .6;
-      img {
-        width: 130%;
-        height: 130%;
+    @media only screen and (min-width: 870px) {
+      .box .text h1 {
+        font-size: 8em;
+        //font-family: "Noto Serif", serif, "Roboto", sans-sedrif !important;
+      }
+      .imgFrame {
+        //opacity: .6;
+        img {
+          width: 130%;
+          height: 130%;
+        }
       }
     }
   }

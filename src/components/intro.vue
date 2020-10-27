@@ -144,17 +144,21 @@ export default {
 }
 
 .tooltips {
-  //background: red;
-  opacity: 0.3;
-  position: absolute;
+  background: var(--details);
+  padding: 1em;
+  border-radius: 50%;
+  opacity: 0.7;
+  position: fixed;
   z-index: 20;
   bottom: 50px;
   left: 0px;
   right: 0px;
   width: 9em;
+  height: 9em;
   margin: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   transition: opacity 0.4s;
   cursor: pointer;
@@ -203,7 +207,8 @@ export default {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   display: grid;
-  align-content: center;
+  //align-content: center;
+  padding-top: 13em;
 }
 
 .card__front {
@@ -235,10 +240,15 @@ export default {
   transform: rotateY(0.5turn);
   color: var(--bg);
   background: var(--details);
+  height: 5em;
+  padding-top: 35vh;
+  @media only screen and (max-width: 570px) {
+    padding-top: 25vh;
+  }
   p {
-    font-size: clamp(10px, 3vw, 1.4em);
+    font-size: clamp(20px, 3vw, 1.4em);
     &:nth-last-of-type(3) {
-      font-size: clamp(10px, 3vw, 2em);
+      font-size: clamp(20px, 3vw, 2em);
     }
   }
 }
@@ -280,9 +290,10 @@ export default {
     clip-path: polygon(0% 0%, 100% 0%, 100% 120%, 0% 120%);
     transition: 0.4s;
     &.reduce {
-      clip-path: polygon(20% 20%, 80% 20%, 85% 90%, 10% 80%);
-      animation: bgReveal 2s cubic-bezier(0.85, 0, 0.15, 1);
-      //padding-top: 30vh;
+      @media only screen and (min-width: 570px) {
+        clip-path: polygon(20% 20%, 80% 20%, 85% 90%, 10% 80%);
+        animation: bgReveal 2s cubic-bezier(0.85, 0, 0.15, 1);
+      }
     }
   }
 }
@@ -291,7 +302,7 @@ export default {
   min-height: 10em;
   animation: textAppear 2s cubic-bezier(0.85, 0, 0.15, 1);
   animation-fill-mode: backwards;
-  margin-top: -10em;
+  //margin-top: -10em;
   &:hover h1.shadow {
     //clip-path: polygon(0 120%, 100% 120%, 100% 120%, 0% 120%);
     transform: scale(1.05);
@@ -317,9 +328,6 @@ h1 {
   -webkit-text-stroke-color: var(--bg);
   -webkit-text-fill-color: var(--bg);
   clip-path: polygon(0 0%, 100% 0%, 100% 120%, 0% 120%);
-  &:hover {
-    //transform: scale(1.1);
-  }
   &.classic {
     animation: textFill 1s cubic-bezier(0, 0.55, 0.45, 1);
     animation-delay: 2.5s;
