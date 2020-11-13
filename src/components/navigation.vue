@@ -17,7 +17,9 @@
       @click="letterClicked(letter.title)"
       :key="index"
     >
-      <p :style="letter.font">A</p>
+      <p :style="'font-family: ' + letter.font + ';'">
+        {{ getFirstLetter(letter.title) }}
+      </p>
     </div>
 
     <svg class="svgFilter" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -43,6 +45,10 @@ import { gsap } from "gsap";
 export default {
   name: "navigation",
   methods: {
+    getFirstLetter(word) {
+      var res = word.charAt(0);
+      return res;
+    },
     letterClicked(title) {
       //this.$store.commit("titleChange", title);
       let el = document.getElementById(title);
@@ -61,6 +67,8 @@ export default {
     },
   },
   mounted() {
+    this.$store.dispatch("_setGSAP_highlight");
+
     var tl = gsap.timeline();
 
     tl.to("#start", 3, {

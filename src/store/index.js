@@ -3,18 +3,21 @@ import { createStore } from 'vuex'
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+import { ExpoScaleEase } from "gsap/EasePack";
+import { TweenMax, Power2 } from "gsap";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ExpoScaleEase, TweenMax, Power2);
 
 export default createStore({
   state: {
     nav: false,
     itemRefs: [],
+    gsap_gates: [],
     mode: false,
     active: null,
     artickles: [
       {
-        font: "font-family: 'victorian'",
+        font: "victorian",
         top: "top: 0px",
         image:
           "https://i.pinimg.com/originals/7e/b0/e7/7eb0e71dad06922a019d6df1d3d0cb0a.jpg",
@@ -30,7 +33,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Kaoly'",
+        font: "Kaoly",
         top: "top: 0px",
         image:
           "https://thewalters.org/wp-content/uploads/Mucha_page-header2.jpg",
@@ -47,7 +50,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Noto Serif'",
+        font: "Noto Serif",
         top: "top: -240px",
         image:
           "https://previews.dropbox.com/p/thumb/AA_0QcCPc99azRgS5UnlIXl_1UGWpFN4RsJ0xwjy6VPasyOTbS7QmyVaoAj-s1H7IVB9jfzW3qmg0CcaOahCHNEhyzgwQ3f7rnAUkBBfCjWPWh-IEtQdfQ3IUXyXh5pIRrecU77maLrleTWBVTjjnVuVnHJN16CGHrMSHSgqg56lXHbv77qaLYY-QBytvWmimfNosOcNcOC0DmJ0cPZ2TagF5HAwcqmRwhCQ_J4KsPCMltFDCO7bzLTopmiNOgT2ru0Wyix0O0-glW6QE2OIxjqLY3dACFav3bJcI0sXzMu13ggXEp9UniQ-6vlcSy6ga_IMt-QYlFPChe5ygSNhHpU0RG45wnelvcRKXgc0PR0E8Q/p.png?fv_content=true&size_mode=5",
@@ -65,7 +68,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'artdeco'",
+        font: "artdeco",
         top: "top: 0px",
         image:
           "https://philgsblog.files.wordpress.com/2020/08/a1-chicago-art-deco-poster-1929-letter-twitter.jpg",
@@ -81,7 +84,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Dancing Script'",
+        font: "Dancing Script",
         top: "top: 0px",
         image:
           "https://cdn.britannica.com/79/91479-050-24F98E12/Guernica-canvas-Pablo-Picasso-Madrid-Museo-Nacional-1937.jpg",
@@ -99,7 +102,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Vampiro One'",
+        font: "Vampiro One",
         top: "top: 0px",
         image:
           "https://fahrenheitmagazine.com/sites/default/files/wp-content/uploads/2019/05/portada-pop-art.jpg",
@@ -117,7 +120,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'psy'",
+        font: "psy",
         top: "top: 0px",
         image:
           "https://lobopopart.com.br/wp-content/uploads/2017/08/Movimento-Psicodelico-dos-anos-60.jpg",
@@ -134,7 +137,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'swiss'",
+        font: "swiss",
         top: "top: 0px",
         image:
           "https://graphicdesignhistory.akidesign.no/wp-content/uploads/2018/08/swiss-cover.jpg",
@@ -153,7 +156,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Special Elite'",
+        font: "Special Elite",
         top: "top: 0px",
         image:
           "https://i.ytimg.com/vi/BNdCMOJualM/maxresdefault.jpg",
@@ -172,7 +175,7 @@ export default createStore({
         ]
       },
       {
-        font: "font-family: 'Press Start 2P'",
+        font: "Press Start 2P",
         top: "top: 0px",
         image:
           "https://thumbs-prod.si-cdn.com/n-21IFTRkKZGMZVz-sXxo2lLeI0=/fit-in/1072x0/https://public-media.si-cdn.com/filer/91/bf/91bf79d7-1edf-4c76-b434-0c20a4210e47/susankare01_apple_macintosh_computer_icons_examples.jpg",
@@ -197,7 +200,6 @@ export default createStore({
       state.active = payload
     },
 
-
     modeChange(state, payload) {
       state.mode = payload
     },
@@ -215,20 +217,31 @@ export default createStore({
     },
     resetRef(state) {
       state.itemRefs = []
+    },
+
+    pushGate(state, payload) {
+      state.gsap_gates.push(payload)
+    },
+    resetGates(state) {
+      //this one is not in use right now. Might delete
+      state.gsap_gates = []
     }
   },
   actions: {
     artickleClicked(context, { el, toggle }) {
+      //let parent = el.parentElement;
       let title = el.getAttribute("id");
 
       if (!toggle) {
-        context.commit("modeChange", true);
         context.dispatch("_gsapScroll", { el: el, time: 2 });
-        context.dispatch("_resetGSAP", title);
-        setTimeout(() => {
-          context.dispatch("_gsapScroll", { el: el, time: 2 });
-          context.dispatch("_resetGSAP", title);
-        }, 2000);
+        context.commit("titleChange", title);
+        //context.commit("modeChange", true);
+        //context.dispatch("_resetGSAP", title);
+        //setTimeout(() => {
+        //  context.dispatch("_gsapScroll", { el: parent, time: 2 });
+        //  //context.dispatch("_resetGSAP", title);
+        //  context.commit("titleChange", title);
+        //}, 2000);
       } else {
         context.commit("modeToggle");
         context.dispatch("_interval", el);
@@ -241,7 +254,7 @@ export default createStore({
       var interval = setInterval(function () {
         context.commit("titleChange", title);
         context.dispatch("_gsapScroll", { el: el, time: 0.01 });
-      }, 0.1);
+      }, 0.00001);
       setTimeout(() => {
         clearInterval(interval);
         context.dispatch("_resetGSAP", title);
@@ -254,17 +267,14 @@ export default createStore({
         scrollTo: { y: el, offsetY: 200, autoKill: false },
         ease: true,
       });
-
     },
 
     _resetGSAP(context, target) {
       //Kill triggers
       context.dispatch("_killTrigger", "letterHighlight");
       context.dispatch("_killTrigger", "navToggle");
-
-      //Set triggers
-      context.dispatch("_setGSAP_highlight");
-      context.dispatch("_setGSAP_nav");
+      context.dispatch("_killTrigger", "gate");
+      context.dispatch("_killTrigger", "eye");
 
       //Make sure the right target is on
       if (target) {
@@ -272,7 +282,67 @@ export default createStore({
       }
     },
 
+    _resetGate() {
+      //this should be deleted
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".bugFix",
+          start: "top 20%",
+          end: "1200% top",
+          toggleActions: "restart none reverse none",
+          pin: true,
+          scrub: true,
+          id: "gate",
+        },
+      });
+
+      tl.from(".test", {
+        scale: "5",
+      });
+    },
+
+    _resetGates(context) {
+      context.dispatch("_killTrigger", "gate");
+      //context.dispatch("_resetGate");
+
+      //let gates = context.state.gsap_gates;
+      //gates.forEach((gate) => {
+      //  context.dispatch("_setGate", gate);
+      //});
+    },
+
+    _setGate(context, gate) {
+      let enter = gate.enter;
+      let name = gate.name;
+      let trigger = gate.trigger;
+
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "." + trigger,
+          start: "top 20%",
+          end: "1200% top",
+          toggleActions: "restart none reverse none",
+          pin: true,
+          scrub: true,
+          id: "gate",
+        },
+      });
+
+      if (enter) {
+        tl.to("." + name, {
+          scale: "30",
+          ease: ExpoScaleEase.config(0.5, 3, Power2.easeInOut),
+        });
+      } else {
+        tl.from("." + name, {
+          scale: "30",
+        });
+      }
+
+    },
+
     _setGSAP_highlight(context) {
+      console.log("Nav Init");
       //For the menu letter highlight on scroll
       context.state.itemRefs.forEach((el) => {
         gsap.from(el.querySelector(".box"), {
@@ -307,6 +377,8 @@ export default createStore({
           end: "bottom center",
           onEnter: () => (context.commit("navToggle", true)),
           onLeaveBack: () => (context.commit("navToggle", false)),
+          onLeave: () => (context.commit("navToggle", false)),
+          onEnterBack: () => (context.commit("navToggle", true)),
         },
         ease: "none",
       });
@@ -319,9 +391,22 @@ export default createStore({
         getGroup.filter((p) => p.vars.id === group);
 
       scrollMenuGroup(trigger).forEach((t) => {
-        t.kill();
+        t.refresh();
       });
     },
+
+    __printTriggers(context, id) {
+      let getGroup = ScrollTrigger.getAll();
+
+      let scrollMenuGroup = (group) =>
+        getGroup.filter((p) => p.vars.id === group);
+
+      let array = scrollMenuGroup(id)
+
+      array.forEach((item) => {
+        console.log(item.vars);
+      });
+    }
 
   }
 })

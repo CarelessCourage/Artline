@@ -1,17 +1,22 @@
 <template>
-  <toggleEye v-if="false" />
   <transition name="nav">
     <navigation v-if="$store.state.nav && $store.state.mode" />
   </transition>
 
   <intro />
-  <gate v-if="true" :enter="true" />
+  <gate :enter="true" />
 
   <section class="artickles">
     <artickleVue v-if="true" />
+    <leaveBtn v-if="$store.state.mode" />
   </section>
 
-  <box v-if="false" />
+  <gate
+    :enter="false"
+    triggerClass="gateTwo"
+    gateName="svgTwo"
+    eyeName="eyePathTwo"
+  />
 </template>
 
 <script>
@@ -21,11 +26,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import navigation from "./components/navigation";
-import toggleEye from "./components/toggleEye";
 import intro from "./components/intro";
 import artickleVue from "./components/artickle";
-import box from "./components/box";
 import gate from "./components/gate";
+import leaveBtn from "./components/leaveBtn";
 
 //import LocomotiveScroll from "locomotive-scroll";
 import "locomotive-scroll/dist/locomotive-scroll.min.css";
@@ -34,16 +38,18 @@ export default {
   name: "app",
   components: {
     navigation,
-    toggleEye,
     intro,
     artickleVue,
-    box,
     gate,
+    leaveBtn,
   },
   data() {
     return {
       lms: null,
     };
+  },
+  mounted() {
+    this.$store.dispatch("_setGSAP_nav");
   },
 };
 </script>

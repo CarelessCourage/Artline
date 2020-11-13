@@ -1,4 +1,10 @@
 <template>
+  <h2
+    v-if="!$store.state.mode"
+    style="text-align: left; opacity: 0.5; font-size: 1em"
+  >
+    Click to Enter an artickle
+  </h2>
   <div
     :ref="setItemRef"
     class="titleBox"
@@ -6,16 +12,20 @@
     v-for="(art, index) in artickles"
     :key="index"
     :id="art.title"
-    @click="
-      $store.dispatch('artickleClicked', {
-        el: $event.currentTarget,
-        toggle: true,
-      })
-    "
   >
-    <div class="box">
+    <div
+      class="box"
+      @click="
+        $store.dispatch('artickleClicked', {
+          el: $event.currentTarget,
+          toggle: true,
+        })
+      "
+    >
       <div class="text" :class="{ extra: art.title == 'Punk New Wave' }">
-        <h1 :style="art.font">{{ art.title }}</h1>
+        <h1 :style="getFontStyle(art.font)">
+          {{ art.title }}
+        </h1>
         <h2>{{ art.date }}</h2>
       </div>
       <div class="imgFrame">
@@ -36,6 +46,7 @@
       <div class="contentWrapper">
         <div
           class="content"
+          :style="getFontStyle(art.font)"
           v-for="(paragraph, index) in art.content"
           :key="index"
         >
@@ -55,9 +66,6 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 export default {
   name: "intro",
   computed: {
-    assetsPath: function (file) {
-      return "assets/" + file + ".png";
-    },
     artickles() {
       return this.$store.state.artickles;
     },
@@ -76,6 +84,17 @@ export default {
     this.$store.dispatch("_resetGSAP");
   },
   methods: {
+    getFontStyle(font) {
+      let style = "--font: " + font + ";";
+      return style;
+    },
+    createClass(font) {
+      var style = document.createElement("style");
+      style.type = "text/css";
+      style.innerHTML = "." + font + "{ --font: " + font + "}";
+      document.getElementsByTagName("head")[0].appendChild(style);
+      return font;
+    },
     startParalax() {
       this.$store.state.itemRefs.forEach((el) => {
         gsap.to(el.querySelector(".paralax"), {
@@ -162,7 +181,7 @@ button {
     img {
       width: 100%;
       height: 15em;
-      background: blue;
+      background: var(--special);
     }
     p {
       margin-top: 0px;
@@ -186,7 +205,20 @@ button {
         width: 25em;
         max-width: 100%;
         float: right;
-        padding-top: 2em;
+        --font: "Kaoly";
+        &:nth-of-type(1) {
+          padding-top: 2em;
+          p::first-letter {
+            color: var(--special);
+            float: left;
+            font-family: var(--font);
+            font-size: 75px;
+            line-height: 60px;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+          }
+        }
         &:nth-last-of-type(1) {
           padding-bottom: 10vw;
         }
@@ -199,6 +231,25 @@ button {
   .box {
     height: 20em;
     border-radius: 0px;
+    &:hover::after {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    &::after {
+      transform: translateX(100px);
+      transition: 0.4s;
+      opacity: 0;
+      content: "leave";
+      background: var(--details);
+      padding: 1em;
+      min-width: 5em;
+      text-align: center;
+      border-radius: 1em;
+      position: absolute;
+      bottom: 10px;
+      right: 20px;
+      color: var(--special);
+    }
   }
   img {
     opacity: 1;
@@ -216,12 +267,12 @@ button {
   margin-top: 0em;
   margin-bottom: 0em;
   transition: 2s;
-  cursor: pointer;
   &.inView {
     //max-height: 200em;
     background-color: red;
   }
   .box {
+    cursor: pointer;
     border-radius: 4em;
     display: flex;
     flex-direction: column;
@@ -233,7 +284,10 @@ button {
     padding: 2em;
     box-sizing: border-box;
     position: relative;
-    transition: height 2s;
+    transition: height opacity 2s;
+    &:hover .imgFrame {
+      opacity: 0.7;
+    }
     @media only screen and (max-width: 870px) {
       height: 10em;
       img {
@@ -288,8 +342,9 @@ button {
     height: 100%;
   }
   h1 {
+    --font: "Dancing Script";
     color: var(--special);
-    font-family: "Dancing Script";
+    font-family: var(--font);
     transition: 0.4s;
   }
   h1,

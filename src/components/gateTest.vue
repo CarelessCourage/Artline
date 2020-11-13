@@ -1,12 +1,8 @@
 <template>
   <div class="bugFix">
-    <div :class="triggerClass" class="gateContainer">
-      <div :class="gateName" class="svg_gate">
-        <toggleEye
-          :triggerClass="triggerClass"
-          :eyeName="eyeName"
-          :close="enter"
-        />
+    <div class="testGate gateContainer">
+      <div class="svg_gate testGateName" @click="reset">
+        <toggleEye />
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 343.36 546.57">
           <path
             class="cls-1"
@@ -458,10 +454,6 @@ export default {
     toggleEye,
   },
   props: {
-    enter: {
-      type: Boolean,
-      default: true,
-    },
     triggerClass: {
       type: String,
       default: "gate",
@@ -470,18 +462,41 @@ export default {
       type: String,
       default: "svgGate",
     },
-    eyeName: {
-      type: String,
-    },
   },
   mounted() {
-    let object = {
-      name: this.gateName,
-      trigger: this.triggerClass,
-      enter: this.enter,
-    };
-    this.$store.commit("pushGate", object);
-    this.$store.dispatch("_setGate", object);
+    this.setGate();
+  },
+  methods: {
+    setGate() {
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".testGate",
+          start: "top 20%",
+          end: "1200% top",
+          toggleActions: "restart none reverse none",
+          pin: true,
+          scrub: true,
+          id: "gateTest",
+          markers: true,
+        },
+      });
+
+      tl.from(".testGateName", {
+        scale: "5",
+        ease: ExpoScaleEase.config(0.5, 3, Power2.easeInOut),
+      });
+    },
+    reset() {
+      console.log("reset");
+      let getGroup = ScrollTrigger.getAll();
+
+      let scrollMenuGroup = (varId) =>
+        getGroup.filter((trigger) => trigger.vars.id === varId);
+
+      scrollMenuGroup("gateTest").forEach((i) => {
+        i.refresh();
+      });
+    },
   },
 };
 </script>
