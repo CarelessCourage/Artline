@@ -12,7 +12,7 @@
       :id="art.title"
     >
       <artImage :art="art" />
-      <hookParalax :art="art" v-if="false"/>
+      <hookParalax :art="art" v-if="true" />
       <articleX :art="art" />
     </div>
   </div>
