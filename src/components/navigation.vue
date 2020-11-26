@@ -18,7 +18,7 @@
       :key="index"
     >
       <p :style="'font-family: ' + letter.font + ';'">
-        {{ getFirstLetter(letter.title) }}
+        {{ index + 1 }}
       </p>
     </div>
 

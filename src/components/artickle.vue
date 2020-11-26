@@ -1,58 +1,30 @@
 <template>
-  <h2
-    v-if="!$store.state.mode"
-    style="text-align: left; opacity: 0.5; font-size: 1em"
-  >
-    Click to Enter an artickle
-  </h2>
   <div
     :ref="setItemRef"
     class="titleBox"
     :class="{ expanded: mode, classic: !mode }"
     v-for="(art, index) in artickles"
     :key="index"
-    :id="art.title"
   >
-    <div
-      class="box"
-      @click="
-        $store.dispatch('artickleClicked', {
-          el: $event.currentTarget,
-          toggle: true,
-        })
-      "
-    >
-      <div class="text" :class="{ extra: art.title == 'Punk New Wave' }">
-        <h1 :style="getFontStyle(art.font)">
-          {{ art.title }}
-        </h1>
+    <div class="box">
+      <div class="text">
+        <h1>{{ art.title }}</h1>
         <h2>{{ art.date }}</h2>
       </div>
       <div class="imgFrame">
-        <img :style="art.top" :src="art.image" />
+        <img :src="art.image" @click="changeMode($event.currentTarget)" />
       </div>
     </div>
-
     <transition name="enterPar">
-      <div v-show="!mode" data-speed=".2" class="paralax">
-        <h2 style="color: var(--special)">{{ art.title }}</h2>
-        <p>{{ art.hook }}</p>
-      </div>
+      <p v-if="false" class="paralax" v-show="!mode" data-speed=".2">
+        {{ art.content }}
+      </p>
     </transition>
-
-    <div class="art" v-if="mode">
-      <p class="intro">{{ art.intro }}</p>
-      <img :src="art.subimg" />
-      <div class="contentWrapper">
-        <div
-          class="content"
-          :style="getFontStyle(art.font)"
-          v-for="(paragraph, index) in art.content"
-          :key="index"
-        >
-          <p>{{ paragraph.source }}</p>
-        </div>
-      </div>
+    <div class="art">
+      <transition name="enter">
+        <p v-if="mode">{{ art.content }}{{ art.content }}{{ art.content }}{{ art.content }}</p>
+      </transition>
+      <button v-if="false">Read More</button>
     </div>
   </div>
 </template>
@@ -61,46 +33,144 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+require('../assets/psy.png')
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 export default {
   name: "intro",
   computed: {
-    artickles() {
-      return this.$store.state.artickles;
-    },
-    active() {
-      return this.$store.state.active;
-    },
-    mode() {
-      return this.$store.state.mode;
-    },
+     assetsPath: function(file) {
+
+         return 'assets/' + file +'.png';
+     }
+  },
+  data: function () {
+    return {
+      mode: false,
+      syncScroll: {
+        timer: 0,
+        el: null,
+      },
+      itemRefs: [],
+      artickles: [
+        {
+          image:
+            "https://aliseckin.com/wp-content/uploads/2017/02/Rimmels_toilet_vinegar-1.jpg",
+          title: "Victorian",
+          date: "1837-1901",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://thewalters.org/wp-content/uploads/Mucha_page-header2.jpg",
+          title: "Art Nouveau",
+          date: "1890-1920",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://previews.dropbox.com/p/thumb/AA_0QcCPc99azRgS5UnlIXl_1UGWpFN4RsJ0xwjy6VPasyOTbS7QmyVaoAj-s1H7IVB9jfzW3qmg0CcaOahCHNEhyzgwQ3f7rnAUkBBfCjWPWh-IEtQdfQ3IUXyXh5pIRrecU77maLrleTWBVTjjnVuVnHJN16CGHrMSHSgqg56lXHbv77qaLYY-QBytvWmimfNosOcNcOC0DmJ0cPZ2TagF5HAwcqmRwhCQ_J4KsPCMltFDCO7bzLTopmiNOgT2ru0Wyix0O0-glW6QE2OIxjqLY3dACFav3bJcI0sXzMu13ggXEp9UniQ-6vlcSy6ga_IMt-QYlFPChe5ygSNhHpU0RG45wnelvcRKXgc0PR0E8Q/p.png?fv_content=true&size_mode=5",
+          title: "Bauhaus",
+          date: "1900-1930",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://previews.dropbox.com/p/thumb/AA9_gDaD_qi0zLPL5XNZFvGFGv3bFv1ztAUirnzhQtETg3zsyF32WR6d8nVklm5mRwRaZ_afZ0qsOiVK4EDJXAzHiB-PhyzzpPYKtr-2FGmSp9dJ659skgbz_Wt63AJE_qFhGud8Lcb5NZod3EvJKPxvt3z8g8x_frbo4Qn3uhscGu7FN1cMn2xScEXLzu5I_mmfXvG7SY3lIO1T3Kg1L5umiohUBdsLhNs1S4nwER6EThC8HcSxXHJTJ5jK1Asivy9_IXwyKyNlNCDCEPoHGPoK18a3ZSY6aIS-tkaYsvErQ5Tg5W15iBGvjvW1e0lLal1L60jMbOj1FXVMtCflKsJ9MPbXzGL65mtGdUPRHZOOqw/p.png?fv_content=true&size_mode=5",
+          title: "Art Deco",
+          date: "1920-1940",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://cdn.britannica.com/79/91479-050-24F98E12/Guernica-canvas-Pablo-Picasso-Madrid-Museo-Nacional-1937.jpg",
+          title: "Surrealism",
+          date: "1920-1950",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://fahrenheitmagazine.com/sites/default/files/wp-content/uploads/2019/05/portada-pop-art.jpg",
+          title: "Pop Art",
+          date: "1940-1970",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://previews.dropbox.com/p/thumb/AA8MJyu4YjIYjpOPK-xfc9FBaj-328Im7ikZ4g5Kckgah-QKKVnYilU3S_Jh6ohasmbJIPKJVHzf4L0sk6u3pTdJZa2Dn4--rETJRO_ZDHKm-hoCkuIzsH_9CCRM7nScfjrzAQ69TxAvYJQm5l3EkLBW8TyhWdZo2I64tUsokwbVrXchGBilHRtx6Y4f3LDomBJlh6tQz3SOy3qpocXmgpxmqp46oBCCGzko0DUl3N9vmt8N4NloptQZM2qaTwwY6otU04WVf0gf-PpRVG4ceS66tMpc4sZ6JHKAmNQC-Z77qRApd2XS3h7t3XXtNy1_bcYetH4iN6U_ThgF0GLsYN3m2os2QjXvG5NtxQ5-c4xp-Q/p.png?fv_content=true&size_mode=5",
+          title: "Psychedelia",
+          date: "1960s",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://graphicdesignhistory.akidesign.no/wp-content/uploads/2018/08/swiss-cover.jpg",
+          title: "Swiss",
+          date: "1940-1980",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://i.ytimg.com/vi/BNdCMOJualM/maxresdefault.jpg",
+          title: "Punk New Wave",
+          date: "1970-1980",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+        {
+          image:
+            "https://thumbs-prod.si-cdn.com/n-21IFTRkKZGMZVz-sXxo2lLeI0=/fit-in/1072x0/https://public-media.si-cdn.com/filer/91/bf/91bf79d7-1edf-4c76-b434-0c20a4210e47/susankare01_apple_macintosh_computer_icons_examples.jpg",
+          title: "Flat",
+          date: "2010 - Now",
+          content:
+            "this is an example paragraph. Its full of text about shit I dont care about. dont read this. Why the fuck would you keep reading after I told you not to? This text is pointless... what are you doing? Fucking psycho",
+        },
+      ],
+    };
   },
   mounted() {
     ScrollTrigger.defaults({
       toggleActions: "restart pause resume none",
     });
-    this.startParalax();
-    this.$store.dispatch("_resetGSAP");
+    this.startAnimation();
   },
   methods: {
-    getFontStyle(font) {
-      let style = "--font: " + font + ";";
-      return style;
+    changeMode(el) {
+      this.mode = !this.mode;
+      let target = el.parentElement.parentElement;
+      var interval = setInterval(function () {
+        console.log("hfjhdsjhsdf");
+        gsap.to(window, {
+          duration: 0.01,
+          scrollTo: { y: target, offsetY: 200, autoKill: false },
+        });
+      }, 0.1);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 2000);
     },
-    createClass(font) {
-      var style = document.createElement("style");
-      style.type = "text/css";
-      style.innerHTML = "." + font + "{ --font: " + font + "}";
-      document.getElementsByTagName("head")[0].appendChild(style);
-      return font;
-    },
-    startParalax() {
-      this.$store.state.itemRefs.forEach((el) => {
+    startAnimation() {
+      this.itemRefs.forEach((el) => {
+        gsap.from(el.querySelector(".box"), {
+          scrollTrigger: {
+            trigger: el,
+            start: "top bottom",
+          },
+          x: "0px",
+          ease: "none",
+        });
         gsap.to(el.querySelector(".paralax"), {
           scrollTrigger: {
             trigger: el,
-            id: "paralax",
             scrub: 1,
           },
           y: (i, target) =>
@@ -110,11 +180,11 @@ export default {
       });
     },
     setItemRef(el) {
-      this.$store.commit("pushRef", el);
+      this.itemRefs.push(el);
     },
   },
   beforeUpdate() {
-    this.$store.commit("resetRef");
+    this.itemRefs = [];
   },
 };
 </script>
@@ -146,30 +216,18 @@ button {
   //temp
   margin-top: 25vw;
   .imgFrame {
-    transition: 0.4s;
     img {
-      transition: 0.4s;
       opacity: 1;
+      position: absolute;
+      top: 0px;
       &:hover {
         opacity: 1;
         width: 100%;
       }
     }
-    &:hover {
-      background: var(--special);
-      img {
-        opacity: 0.5;
-      }
-    }
   }
   .text {
     transform: translateY(-270px);
-    @media only screen and (max-width: 1300px) {
-      transform: translateY(-200px);
-      &.extra {
-        transform: translateY(-220px);
-      }
-    }
   }
   .art {
     width: 45em;
@@ -178,84 +236,17 @@ button {
     padding: 2em;
     padding-bottom: 0.5em;
     box-sizing: border-box;
-    img {
-      width: 100%;
-      height: 15em;
-      background: var(--special);
-    }
     p {
       margin-top: 0px;
       overflow: hidden;
-    }
-    .intro {
-      width: 25em;
-      max-width: 100%;
-      //font-weight: bold;
-      padding-bottom: 2em;
-      padding-top: 1em;
-      @media only screen and (max-width: 450px) {
-        width: 100%;
-      }
-    }
-    .contentWrapper {
-      // this doesnt work for some fucking reason ... no time to fix. look at later...
-      //padding-bottom: 20em;
-
-      .content {
-        width: 25em;
-        max-width: 100%;
-        float: right;
-        --font: "Kaoly";
-        &:nth-of-type(1) {
-          padding-top: 2em;
-          p::first-letter {
-            color: var(--special);
-            float: left;
-            font-family: var(--font);
-            font-size: 75px;
-            line-height: 60px;
-            padding-top: 4px;
-            padding-right: 8px;
-            padding-left: 3px;
-          }
-        }
-        &:nth-last-of-type(1) {
-          padding-bottom: 10vw;
-        }
-        @media only screen and (max-width: 450px) {
-          width: 100%;
-        }
-      }
     }
   }
   .box {
     height: 20em;
     border-radius: 0px;
-    &:hover::after {
-      opacity: 1;
-      transform: translateX(0px);
-    }
-    &::after {
-      transform: translateX(100px);
-      transition: 0.4s;
-      opacity: 0;
-      content: "leave";
-      background: var(--details);
-      padding: 1em;
-      min-width: 5em;
-      text-align: center;
-      border-radius: 1em;
-      position: absolute;
-      bottom: 10px;
-      right: 20px;
-      color: var(--special);
-    }
   }
   img {
     opacity: 1;
-  }
-  h2 {
-    color: var(--details);
   }
 }
 
@@ -272,7 +263,6 @@ button {
     background-color: red;
   }
   .box {
-    cursor: pointer;
     border-radius: 4em;
     display: flex;
     flex-direction: column;
@@ -284,16 +274,7 @@ button {
     padding: 2em;
     box-sizing: border-box;
     position: relative;
-    transition: height opacity 2s;
-    &:hover .imgFrame {
-      opacity: 0.7;
-    }
-    @media only screen and (max-width: 870px) {
-      height: 10em;
-      img {
-        opacity: 0.1;
-      }
-    }
+    transition: height 2s;
   }
   .text {
     transition: transform 1s;
@@ -317,19 +298,11 @@ button {
     justify-content: center;
     background: var(--details);
   }
-  &.classic:hover {
-    @media only screen and (min-width: 870px) {
-      .box .text h1 {
-        font-size: 8em;
-        //font-family: "Noto Serif", serif, "Roboto", sans-sedrif !important;
-      }
-      .imgFrame {
-        //opacity: .6;
-        img {
-          width: 130%;
-          height: 130%;
-        }
-      }
+  &.classic .imgFrame:hover  {
+    //opacity: .6;
+    img {
+      width: 130%;
+      height: 130%;
     }
   }
   img {
@@ -342,37 +315,26 @@ button {
     height: 100%;
   }
   h1 {
-    --font: "Dancing Script";
     color: var(--special);
-    font-family: var(--font);
-    transition: 0.4s;
+    font-family: 'Dancing Script';
   }
   h1,
   h2 {
     text-align: center;
   }
   h2 {
-    transition: color 0.4s;
-    margin-top: -0.5vw;
-    color: var(--bg);
-    opacity: 0.8;
+    margin-top: -.5vw;
+    opacity: .8
   }
-  .paralax {
-    width: 25em;
+  p.paralax {
     position: absolute;
     left: -25vw;
     bottom: -300px;
     background: var(--bg);
     padding: 2em;
     pointer-events: none;
-    @media only screen and (max-width: 880px) {
-      display: none;
-    }
-    p {
-      font-size: clamp(15px, 1vw, 2em);
-    }
   }
-  &:nth-child(odd) .paralax {
+  &:nth-child(odd) p {
     left: auto;
     right: -25vw;
   }

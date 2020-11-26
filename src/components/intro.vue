@@ -7,7 +7,7 @@
             <div
               v-if="true"
               id="hero"
-              class="titleBox"
+              class="title_container"
               :class="{ triggered: trigger }"
             >
               <h1
@@ -211,14 +211,11 @@ export default {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   display: grid;
-  //align-content: center;
   padding-top: 13em;
 }
 
 .card__front {
   background-color: var(--details);
-  //background-color: var(--bg);
-  //background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/308367/fair.jpg);
   background-size: cover;
   background-blend-mode: overlay;
   transform: translateZ(5rem);
@@ -236,7 +233,6 @@ export default {
 .card__body {
   transform: var(--level-two);
   font-weight: var(fw-normal);
-  //font-size: 1.5rem;
   line-height: 1.6;
 }
 
@@ -289,7 +285,6 @@ export default {
     flex-direction: column;
     background: var(--details);
     height: 100%;
-    //padding-top: 40vh;
     box-sizing: border-box;
     clip-path: polygon(0% 0%, 100% 0%, 100% 120%, 0% 120%);
     transition: 0.4s;
@@ -302,13 +297,11 @@ export default {
   }
 }
 
-.titleBox {
+.title_container {
   min-height: 10em;
   animation: textAppear 2s cubic-bezier(0.85, 0, 0.15, 1);
   animation-fill-mode: backwards;
-  //margin-top: -10em;
   &:hover h1.shadow {
-    //clip-path: polygon(0 120%, 100% 120%, 100% 120%, 0% 120%);
     transform: scale(1.05);
   }
 }
