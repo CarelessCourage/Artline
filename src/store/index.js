@@ -53,7 +53,7 @@ export default createStore({
         font: "Noto Serif",
         top: "top: -240px",
         image:
-          "https://previews.dropbox.com/p/thumb/AA_0QcCPc99azRgS5UnlIXl_1UGWpFN4RsJ0xwjy6VPasyOTbS7QmyVaoAj-s1H7IVB9jfzW3qmg0CcaOahCHNEhyzgwQ3f7rnAUkBBfCjWPWh-IEtQdfQ3IUXyXh5pIRrecU77maLrleTWBVTjjnVuVnHJN16CGHrMSHSgqg56lXHbv77qaLYY-QBytvWmimfNosOcNcOC0DmJ0cPZ2TagF5HAwcqmRwhCQ_J4KsPCMltFDCO7bzLTopmiNOgT2ru0Wyix0O0-glW6QE2OIxjqLY3dACFav3bJcI0sXzMu13ggXEp9UniQ-6vlcSy6ga_IMt-QYlFPChe5ygSNhHpU0RG45wnelvcRKXgc0PR0E8Q/p.png?fv_content=true&size_mode=5",
+          "https://i.imgur.com/dIKwLvZ.png",
         title: "Bauhaus",
         date: "1900-1930",
         subimg: "https://artsy-media-uploads.s3.amazonaws.com/SRW7eb3GxnwFPPSIwmH1pw%2Fcustom-Custom_Size___joost-schmidt-plakat-zur-bauhaus-asstellung-in-weimar-1923-1923+copy.jpg",

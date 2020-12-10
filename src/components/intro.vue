@@ -31,7 +31,7 @@
             <p class="card__body">
               check out my <span class="plug">Instagram</span>
             </p>
-            <p style="margin-top: -1.21em" class="card__body">
+            <p style="margin-top: -3.61em" class="card__body">
               and my <span class="plug">Behance</span>
             </p>
           </div>
@@ -240,7 +240,7 @@ export default {
   transform: rotateY(0.5turn);
   color: var(--bg);
   background: var(--details);
-  height: 5em;
+  height: 25em;
   padding-top: 35vh;
   @media only screen and (max-width: 570px) {
     padding-top: 25vh;
@@ -315,7 +315,7 @@ h1 {
   right: 0;
   position: absolute;
   top: 0px;
-  width: 8em;
+  width: 5em;
   margin: auto;
   font-size: clamp(30px, 10vw, 7em);
   transform: scale(1);
