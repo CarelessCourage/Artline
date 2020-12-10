@@ -6,7 +6,7 @@
   <intro />
   <gate :enter="true" />
 
-  <section>
+  <section style="position: relative; z-index: 10;">
     <artickles />
     <transition name="leaveBtn">
       <leaveBtn v-if="$store.state.mode" />
