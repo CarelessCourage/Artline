@@ -53,11 +53,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+$bg: #3d405b;
+$bg2: #f4f1de;
+$mg: mix($bg, $bg2, 50%);
+
 .paralax {
-  width: 25em;
   position: absolute;
-  left: -25vw;
-  bottom: -300px;
+  top: 500px;
+  width: 35vw;
   background: var(--bg);
   padding: 2em;
   pointer-events: none;
@@ -65,34 +68,73 @@ export default {
     display: none;
   }
   p {
-    font-size: clamp(15px, 1vw, 2em);
+    font-size: clamp(15px, 1.5vw, 2em);
   }
   span {
     font-size: 1.5em;
+    text-transform: uppercase;
+    margin-right: 0.5em;
+    font-weight: 900;
+  }
+  h2 {
+    font-size: 3em;
+    color: $mg;
   }
 }
 
-//&:nth-child(odd) .paralax {
-//  left: auto;
-//  right: -25vw;
-//}
+//Odd/Even Managment
+.artickleContainer {
+  //Odd
+  &:nth-of-type(odd) {
+    .paralax {
+      left: 0px;
+      padding-left: 2em;
+      padding-right: 4em;
+    }
+    .enterPar-leave-active {
+      animation: enterLeft 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
+    }
+    .enterPar-enter-active {
+      animation: enterLeft 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+  }
 
-.enterPar-leave-active {
-  animation: enterPar 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
+  //Even
+  &:nth-of-type(even) {
+    .paralax {
+      left: auto;
+      right: 0px;
+      padding-right: 2em;
+      padding-left: 4em;
+    }
+    .enterPar-leave-active {
+      animation: enterRight 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
+    }
+    .enterPar-enter-active {
+      animation: enterRight 0.5s cubic-bezier(1, 0.5, 0.8, 1);
+    }
+  }
 }
 
-.enterPar-enter-active {
-  animation: enterPar 0.5s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-@keyframes enterPar {
+@keyframes enterLeft {
   0% {
-    opacity: 0;
-    //transform: translateX(-100px);
+    //opacity: 0;
+    left: -600px;
   }
   100% {
-    opacity: 1;
-    //transform: translateX(0);
+    //opacity: 1;
+    left: -0px;
+  }
+}
+
+@keyframes enterRight {
+  0% {
+    //opacity: 0;
+    right: -600px;
+  }
+  100% {
+    //opacity: 1;
+    right: -0px;
   }
 }
 </style>

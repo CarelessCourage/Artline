@@ -17,7 +17,8 @@
       @click="letterClicked(letter.title)"
       :key="index"
     >
-      <p :style="'font-family: ' + letter.font + ';'">
+      <p>
+        <!-- :style="'font-family: ' + letter.font + ';'"-->
         {{ index + 1 }}
       </p>
     </div>
@@ -50,7 +51,6 @@ export default {
       return res;
     },
     letterClicked(title) {
-      //this.$store.commit("titleChange", title);
       let el = document.getElementById(title);
       this.$store.dispatch("artickleClicked", { el: el, toggle: false });
     },
@@ -98,10 +98,8 @@ svg#menu {
   position: absolute;
   height: 100vh;
   min-width: 8.8em;
-  //background: blue;
   transform: scaleX(0.69);
   transform-origin: left;
-  //width: 3em;
   path {
     fill: var(--details);
   }

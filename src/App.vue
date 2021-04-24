@@ -1,17 +1,18 @@
 <template>
-  <transition name="nav">
-    <navigation v-if="$store.state.nav && $store.state.mode" />
-  </transition>
-
   <intro />
+
   <gate :enter="true" />
 
-  <section style="position: relative; z-index: 10;">
+  <section style="position: relative; z-index: 10">
     <artickles />
     <transition name="leaveBtn">
       <leaveBtn v-if="$store.state.mode" />
     </transition>
   </section>
+
+  <transition name="nav">
+    <navigation v-if="$store.state.nav && $store.state.mode" />
+  </transition>
 
   <gate
     :enter="false"
@@ -22,19 +23,15 @@
 </template>
 
 <script>
-//v-if="$store.state.nav && $store.state.mode"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 import navigation from "./components/navigation";
 import intro from "./components/intro";
-import artickles from "./components/artickles";
+import artickles from "./components/content/artickles";
 import gate from "./components/gate";
 import leaveBtn from "./components/leaveBtn";
-
-//import LocomotiveScroll from "locomotive-scroll";
-import "locomotive-scroll/dist/locomotive-scroll.min.css";
 
 export default {
   name: "app",
@@ -44,11 +41,6 @@ export default {
     artickles,
     gate,
     leaveBtn,
-  },
-  data() {
-    return {
-      lms: null,
-    };
   },
   mounted() {
     this.$store.dispatch("_setGSAP_nav");
@@ -60,11 +52,6 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Press+Start+2P&family=Special+Elite&family=Vampiro+One&display=swap");
-
-//font-family: 'Dancing Script', cursive;
-//font-family: 'Press Start 2P', cursive;
-//font-family: 'Special Elite', cursive;
-//font-family: 'Vampiro One', cursive;
 
 @font-face {
   font-family: "psy";
@@ -123,13 +110,14 @@ export default {
 section {
   background: var(--bg);
   position: relative;
+  min-height: 600px;
+  display: flex;
 }
 
 .sticky {
   position: relative;
   height: 200vh;
   padding-bottom: 100vh;
-  //background: var(--bg);
 }
 
 :root {
@@ -190,26 +178,8 @@ ul {
   overflow: hidden;
 }
 
-.titleBox,
-.title_container {
-  position: relative;
-  span {
-    color: var(--special);
-  }
-  h2 {
-    opacity: 0.6;
-  }
-  p {
-    max-width: 100%;
-  }
-}
-
-section {
-  min-height: 600px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+span {
+  color: var(--special);
 }
 
 .nav-leave-active {

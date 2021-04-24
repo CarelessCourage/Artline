@@ -37,57 +37,47 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.expanded .imgFrame {
+$bg: #3d405b;
+$bg2: #f4f1de;
+$mg: mix($bg, $bg2, 50%);
+
+h1 {
+  --font: "Dancing Script";
+  font-family: var(--font);
   transition: 0.4s;
-  img {
-    transition: 0.4s;
-    opacity: 1;
-    &:hover {
-      opacity: 1;
-      width: 100%;
-    }
-  }
-  &:hover {
-    background: var(--special);
-    img {
-      opacity: 0.5;
-    }
-  }
 }
 
-.expanded .text {
-  transform: translateY(-270px);
-  @media only screen and (max-width: 1300px) {
-    transform: translateY(-200px);
-    &.extra {
-      transform: translateY(-220px);
-    }
-  }
+h1,
+h2 {
+  text-align: center;
 }
 
-.expanded .box {
-  height: 20em;
-  border-radius: 0px;
-  &:hover::after {
-    opacity: 1;
-    transform: translateX(0px);
-  }
+h2 {
+  transition: color 0.4s;
+  margin-top: -0.5vw;
+  color: $mg;
 }
 
-.titleBox .box {
-  transition: 0.4s;
+.artickleContainer .box {
   cursor: pointer;
   border-radius: 4em;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
   height: 30em;
-  width: 100%;
+  width: 30em;
+  max-width: 100vw;
+  margin: auto;
+
   padding: 2em;
   box-sizing: border-box;
   position: relative;
-  transition: height opacity 2s;
+
+  transition: 2s;
+
   &:hover .imgFrame {
     opacity: 0.7;
   }
@@ -117,7 +107,7 @@ export default {
   }
 }
 
-.titleBox .text {
+.artickleContainer .text {
   transition: transform 1s;
   pointer-events: none;
   p {
@@ -125,7 +115,7 @@ export default {
   }
 }
 
-.titleBox .imgFrame {
+.artickleContainer .imgFrame {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -138,5 +128,64 @@ export default {
   display: flex;
   justify-content: center;
   background: var(--details);
+}
+
+//Classic
+.classic .box {
+  h1,
+  h2 {
+    opacity: 0;
+    transition: 0.4s ease-in-out;
+  }
+  &:hover {
+    h1,
+    h2 {
+      opacity: 1;
+    }
+  }
+}
+
+//Expanded
+.expanded .box {
+  height: 20em;
+  border-radius: 0px;
+  width: 100vw;
+  margin-top: 25vw;
+  h1 {
+    color: var(--special);
+    opacity: 1;
+  }
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.expanded .imgFrame {
+  transition: 0.4s;
+  img {
+    transition: 0.4s;
+    opacity: 1;
+    &:hover {
+      opacity: 1;
+      width: 100%;
+    }
+  }
+  &:hover {
+    background: var(--special);
+    img {
+      opacity: 0.5;
+    }
+  }
+}
+
+.expanded .text {
+  transform: translateY(-270px);
+  @media only screen and (max-width: 1300px) {
+    transform: translateY(-200px);
+    &.extra {
+      transform: translateY(-220px);
+    }
+  }
 }
 </style>

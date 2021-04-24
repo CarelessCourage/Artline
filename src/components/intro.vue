@@ -298,6 +298,7 @@ export default {
 }
 
 .title_container {
+  position: relative;
   min-height: 10em;
   animation: textAppear 2s cubic-bezier(0.85, 0, 0.15, 1);
   animation-fill-mode: backwards;

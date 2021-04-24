@@ -38,13 +38,6 @@ export default {
       default: "eyePath",
     },
   },
-  methods: {
-    toggleClick() {
-      console.log("fuck yeah");
-      //this.$store.dispatch("__printTriggers", "gate");
-      //this.$store.dispatch("_resetGates");
-    },
-  },
   mounted() {
     let tl = gsap.timeline({
       scrollTrigger: {
