@@ -6,7 +6,7 @@
   <section style="position: relative; z-index: 10">
     <artickles />
     <transition name="leaveBtn">
-      <leaveBtn v-if="$store.state.mode" />
+      <leaveBtn v-if="$store.state.mode && false" />
     </transition>
   </section>
 
@@ -42,8 +42,20 @@ export default {
     gate,
     leaveBtn,
   },
+  methods: {
+    refresh() {
+      this.$store.dispatch("_resetGSAP");
+    },
+  },
   mounted() {
     this.$store.dispatch("_setGSAP_nav");
+    /*gsap.to(window, {
+      duration: 2,
+      scrollTo: { y: 0, offsetY: 0, autoKill: false },
+      ease: true,
+    });*/
+    this.refresh();
+    window.addEventListener("resize", () => this.refresh());
   },
 };
 </script>
@@ -158,7 +170,7 @@ h1 {
 
 h2 {
   font-family: "Noto Serif", serif, "Roboto", sans-sedrif;
-  font-size: clamp(10px, 2vw, 2em);
+  font-size: clamp(10px, 5vw, 4em);
 }
 
 p {

@@ -85,24 +85,36 @@ h2 {
     transform: translateX(100px);
     transition: 0.4s;
     opacity: 0;
-    content: "leave";
+    content: "🠈";
+    text-align: center;
+    font-size: 3em !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: var(--details);
     padding: 1em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    border-radius: 1em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+    //border-radius: 1em;
     font-size: 0.8em;
-    min-width: 5em;
+    height: 100%;
     text-align: center;
     position: absolute;
-    bottom: -20px;
-    right: 20px;
+    //bottom: -20px;
+    right: 0px;
     color: var(--bg);
   }
   @media only screen and (max-width: 870px) {
     height: 10em;
     img {
       opacity: 0.1;
+    }
+    h1 {
+      color: var(--special) !important;
+      opacity: 1 !important;
+    }
+    h2 {
+      opacity: 1 !important;
     }
   }
 }
@@ -152,6 +164,8 @@ h2 {
   width: 100vw;
   margin-top: 25vw;
   h1 {
+    //font-size: 9em;
+    font-size: clamp(40px, 10vw, 15em);
     color: var(--special);
     opacity: 1;
   }
@@ -180,9 +194,9 @@ h2 {
 }
 
 .expanded .text {
-  transform: translateY(-270px);
+  transform: translateY(-320px);
   @media only screen and (max-width: 1300px) {
-    transform: translateY(-200px);
+    transform: translateY(calc(-150px - 10vw));
     &.extra {
       transform: translateY(-220px);
     }

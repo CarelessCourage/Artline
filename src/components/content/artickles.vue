@@ -11,9 +11,13 @@
       :key="index"
       :id="art.title"
     >
-      <ArtImage :art="art" />
-      <HookParalax :art="art" />
-      <ArticleContent :art="art" />
+      <ArtImage
+        :art="art"
+        @mouseover="onBox = index"
+        @mouseleave="onBox = null"
+      />
+      <HookParalax :art="art" :hoverOnBox="onBox !== index" />
+      <ArticleContent :art="art" :mode="mode" />
     </div>
   </div>
 </template>
@@ -45,6 +49,11 @@ export default {
     mode() {
       return this.$store.state.mode;
     },
+  },
+  data: function () {
+    return {
+      onBox: null,
+    };
   },
   mounted() {
     ScrollTrigger.defaults({

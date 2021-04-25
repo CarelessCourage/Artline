@@ -83,7 +83,7 @@ export default {
   p {
     margin: 0px;
     opacity: 0.5;
-    font-size: 1em;
+    font-size: 3em !important;
     text-align: center;
   }
 }

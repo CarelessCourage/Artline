@@ -1,10 +1,26 @@
 <template>
   <transition name="enterPar">
-    <div v-show="!mode" data-speed=".2" class="paralax">
-      <p>
-        <span>{{ art.title }}</span
-        >{{ art.hook }}
-      </p>
+    <div
+      v-show="!mode"
+      data-speed=".2"
+      class="paralax"
+      :class="{ hoverOffBox: !hoverOnBox, hoverOnBox: hoverOnBox }"
+    >
+      <div class="bg">
+        <h2>{{ art.date }}</h2>
+        <p>
+          <span class="title">{{ art.title }}</span>
+          <span
+            class="beat"
+            v-for="(beat, index) in art.hook"
+            :key="index"
+            :class="{ highlight: beat.highlight }"
+            >{{ beat.tekst }}
+          </span>
+        </p>
+      </div>
+
+      <div class="line" v-if="false"></div>
     </div>
   </transition>
 </template>
@@ -19,6 +35,7 @@ export default {
   name: "hookParalax",
   props: {
     art: Object,
+    hoverOnBox: Boolean,
   },
   computed: {
     mode() {
@@ -57,28 +74,66 @@ $bg: #3d405b;
 $bg2: #f4f1de;
 $mg: mix($bg, $bg2, 50%);
 
-.paralax {
+.line {
+  background: var(--details);
+  opacity: 0.2;
+  height: 0.5em;
+  width: 50em;
   position: absolute;
-  top: 500px;
+  top: 10vw;
+  z-index: -200;
+  transition: 0.4s ease-in-out;
+  @media only screen and (max-width: 1000px) {
+    display: none;
+  }
+}
+
+.bg {
   width: 35vw;
   background: var(--bg);
   padding: 2em;
+}
+
+.paralax {
+  --offset: -4em;
+  position: absolute;
+  top: 450px;
   pointer-events: none;
+  transition: 0.2s;
   @media only screen and (max-width: 880px) {
     display: none;
   }
   p {
     font-size: clamp(15px, 1.5vw, 2em);
   }
-  span {
+  .title {
     font-size: 1.5em;
     text-transform: uppercase;
     margin-right: 0.5em;
     font-weight: 900;
   }
+  .beat {
+    color: var(--details);
+  }
+  .highlight {
+    //color: var(--special);
+    opacity: 0.4;
+    font-weight: 900;
+  }
   h2 {
     font-size: 3em;
     color: $mg;
+    margin: 0px;
+    width: 7em;
+    //text-align: center;
+    position: absolute;
+    top: 8vw;
+    transform: rotate(90deg);
+    transition: 0.4s ease-in-out;
+    //background-color: red;
+  }
+  &.hoverOnBox .line {
+    opacity: 0;
   }
 }
 
@@ -86,10 +141,24 @@ $mg: mix($bg, $bg2, 50%);
 .artickleContainer {
   //Odd
   &:nth-of-type(odd) {
-    .paralax {
-      left: 0px;
+    .bg {
       padding-left: 2em;
       padding-right: 4em;
+    }
+    .line {
+      right: -10vw;
+    }
+    .paralax {
+      left: 0px;
+      h2 {
+        right: var(--offset);
+      }
+      &.hoverOffBox {
+        left: -20%;
+        h2 {
+          opacity: 0;
+        }
+      }
     }
     .enterPar-leave-active {
       animation: enterLeft 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
@@ -101,11 +170,25 @@ $mg: mix($bg, $bg2, 50%);
 
   //Even
   &:nth-of-type(even) {
+    .bg {
+      padding-right: 2em;
+      padding-left: 4em;
+    }
+    .line {
+      left: -10vw;
+    }
     .paralax {
       left: auto;
       right: 0px;
-      padding-right: 2em;
-      padding-left: 4em;
+      h2 {
+        left: var(--offset);
+      }
+      &.hoverOffBox {
+        right: -20%;
+        h2 {
+          opacity: 0;
+        }
+      }
     }
     .enterPar-leave-active {
       animation: enterRight 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
@@ -123,7 +206,7 @@ $mg: mix($bg, $bg2, 50%);
   }
   100% {
     //opacity: 1;
-    left: -0px;
+    left: -20%;
   }
 }
 
@@ -134,7 +217,7 @@ $mg: mix($bg, $bg2, 50%);
   }
   100% {
     //opacity: 1;
-    right: -0px;
+    right: -20%;
   }
 }
 </style>

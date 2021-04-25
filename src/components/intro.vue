@@ -38,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="tooltips" @click="reduce = !reduce">
+    <div class="tooltips" :class="{ reduce: reduce }" @click="reduce = !reduce">
       <svg
         class="bounce"
         xmlns="http://www.w3.org/2000/svg"
@@ -146,16 +146,16 @@ export default {
 .tooltips {
   background: var(--details);
   padding: 1em;
-  border-radius: 50%;
+  border-radius: 1em;
   opacity: 0.7;
   position: fixed;
   position: absolute;
   z-index: 20;
-  bottom: 50px;
+  bottom: 3vw;
   left: 0px;
   right: 0px;
-  width: 9em;
-  height: 9em;
+  width: 14em;
+  height: 14em;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -165,6 +165,9 @@ export default {
   cursor: pointer;
   @media only screen and (max-width: 900px) {
     position: absolute;
+  }
+  &.reduce {
+    opacity: 0;
   }
   &:hover {
     opacity: 1 !important;
@@ -177,7 +180,7 @@ export default {
   p {
     margin: 0px;
     opacity: 0.5;
-    font-size: 1em;
+    font-size: 1.5em;
     text-align: center;
   }
 }
@@ -302,8 +305,8 @@ export default {
   min-height: 10em;
   animation: textAppear 2s cubic-bezier(0.85, 0, 0.15, 1);
   animation-fill-mode: backwards;
-  &:hover h1.shadow {
-    transform: scale(1.05);
+  &.triggered h1.shadow {
+    transform: scale(1.05) !important;
   }
 }
 

@@ -1,15 +1,25 @@
 <template>
   <div class="art">
-    <p class="intro">{{ art.intro }}</p>
+    <p class="intro">
+      <span
+        class="beat"
+        v-for="(beat, index) in art.hook"
+        :key="index"
+        :class="{ highlight: beat.highlight }"
+        >{{ beat.tekst }}
+      </span>
+    </p>
     <img :src="art.subimg" />
-    <div
-      class="content"
-      :style="getFontStyle(art.font)"
-      v-for="(paragraph, index) in art.content"
-      :key="index"
-    >
-      <p>{{ paragraph.source }}</p>
-    </div>
+    <p class="content">
+      <span
+        class="paragraph"
+        :style="getFontStyle(art.font)"
+        v-for="(paragraph, index) in art.content"
+        :key="index"
+        >{{ paragraph.source }}
+        <hr />
+      </span>
+    </p>
   </div>
 </template>
 
@@ -18,6 +28,7 @@ export default {
   name: "article",
   props: {
     art: Object,
+    mode: Boolean,
   },
   methods: {
     getFontStyle(font) {
@@ -32,23 +43,36 @@ export default {
 <style scoped lang="scss">
 .art {
   max-height: 0em;
-  width: 45em;
   max-width: 100%;
+  width: 75em;
   margin: auto;
-  transition: 1s;
   overflow: hidden;
   box-sizing: border-box;
+  transition: 1s;
   p {
     margin-top: 0px;
-    overflow: hidden;
   }
   .intro {
     width: 25em;
+    font-size: 5em;
+    font-size: clamp(35px, 5vw, 4em);
+    line-height: 1em;
+    font-weight: 900;
     max-width: 100%;
-    padding-bottom: 2em;
+    margin: 0px;
     padding-top: 1em;
+    padding-bottom: 2em;
+    transform: translateY(-80%);
+    transition: transform 0.4s ease-in-out;
     @media only screen and (max-width: 450px) {
       width: 100%;
+    }
+    @media only screen and (max-width: 1000px) {
+      width: 70vw !important;
+      margin: auto;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 85vw !important;
     }
   }
   img {
@@ -58,26 +82,51 @@ export default {
   }
 
   .content {
-    width: 25em;
+    margin-top: 5em;
+    column-count: 2;
+    width: 0%;
+    height: 0%;
+    //overflow: hidden;
+    span {
+      color: var(--details);
+    }
+    hr {
+      opacity: 0;
+    }
+    @media only screen and (max-width: 1000px) {
+      column-count: 1;
+      width: 70vw !important;
+      margin: auto;
+      margin-top: 2em;
+    }
+    @media only screen and (max-width: 600px) {
+      width: 85vw !important;
+    }
+  }
+  .beat {
+    color: var(--details);
+    &.highlight {
+      color: var(--special);
+    }
+  }
+
+  .content::first-letter {
+    color: var(--special);
+    float: left;
+    font-family: var(--font);
+    font-size: 75px;
+    line-height: 60px;
+    padding-top: 4px;
+    padding-right: 20px;
+    padding-left: 3px;
+  }
+
+  .paragraph {
+    font-size: 1.4em;
     max-width: 100%;
-    float: right;
+    letter-spacing: 0.5px;
+    line-height: 1.4em;
     --font: "Kaoly";
-    &:nth-of-type(1) {
-      padding-top: 2em;
-      p::first-letter {
-        color: var(--special);
-        float: left;
-        font-family: var(--font);
-        font-size: 75px;
-        line-height: 60px;
-        padding-top: 4px;
-        padding-right: 8px;
-        padding-left: 3px;
-      }
-    }
-    &:nth-last-of-type(1) {
-      padding-bottom: 10vw;
-    }
     @media only screen and (max-width: 450px) {
       width: 100%;
     }
@@ -85,8 +134,15 @@ export default {
 }
 
 .expanded .art {
-  max-height: 100em;
+  max-height: 200em;
   padding: 2em;
   padding-bottom: 0.5em;
+  .intro {
+    transform: translateY(-0%);
+  }
+  .content {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

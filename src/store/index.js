@@ -19,12 +19,19 @@ export default createStore({
       {
         font: "victorian",
         top: "top: 0px",
-        image:
-          "https://i.pinimg.com/originals/7e/b0/e7/7eb0e71dad06922a019d6df1d3d0cb0a.jpg",
+        image: require("../assets/themes/victorian/uknown.jpg"),
+        imageAuthor: require("../assets/themes/victorian/Victoria.jpg"),
         title: "Victorian",
         date: "1837-1901",
-        subimg: "https://thegraphicsfairy.com/wp-content/uploads/blogger/-jdKs5jDygpw/T_MT92ohhHI/AAAAAAAASjA/9buBmRAK7O4/s1600/ShopAd-Hats-GraphicsFairy.jpg",
-        hook: 'The aesthetic of victorian style has a rampant use of ornamentation and variation of shape and size. These design choices gave them the ability to fill out the page with lots and lots of forms from images to ornaments to type.',
+        subimg: require("../assets/themes/victorian/unknown.jpg"),
+        subimgAuthor: require("../assets/themes/victorian/Victoria.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Ornamentation and variation of shape and size. ' },
+          { highlight: true, tekst: 'Fill ' },
+          { highlight: false, tekst: 'out the page with lots and lots of forms from images to ' },
+          { highlight: true, tekst: 'ornaments ' },
+          { highlight: false, tekst: 'to type' }
+        ],
         intro: 'The hum of machines pushing and pulling in rhythm, like clockwork. Oliver Twist yelling on the street corner about todays newspaper. A medium you have never experienced before. Not a book written by bald men in monasteries. But a stack of papers printed by machines. And an infinite amount of identical copies of it. We are already in the late industrial revolution which started almost 100 years ago in 1750. And here comes the birth of the printed media. And with it, advertisement. This is where graphic design takes its first breaths. Or, at least, this is the birth we have chosen to start with. Like all media, this one too tends to be born many times.',
         content: [
           { p: true, source: 'Victorian Graphic design. So named after Queen Victoria who happened to be in power at this time during the industrial revolution. Its the first time graphic design has seen the light of the printing world. This revolution came in large part at the hand of new technologies like Linographic printing which allowed for the printing of images. This made magazines and newspapers commercially viable for the first time.' },
@@ -35,12 +42,19 @@ export default createStore({
       {
         font: "Kaoly",
         top: "top: 0px",
-        image:
-          "https://thewalters.org/wp-content/uploads/Mucha_page-header2.jpg",
+        image: require("../assets/themes/nouveau/muchaexample2.jpg"),
+        imageAuthor: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
         title: "Art Nouveau",
         date: "1890-1920",
-        subimg: "https://artandcrafter.com/wp-content/uploads/2019/04/Art-nouveau.jpg",
-        hook: 'One could speculate that Art Nouveau came about as a natural reaction to the mass produced composition of the Victorian era. It focuses heavily on a more painterly, handcrafted estetic. And asymmetrical details.',
+        subimg: require("../assets/themes/nouveau/muchaexample.jpg"),
+        subimgAuthor: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Perhaps a ' },
+          { highlight: true, tekst: 'natural ' },
+          { highlight: false, tekst: 'reaction to the mass produced composition of the Victorian era. A more painterly, ' },
+          { highlight: true, tekst: 'handcrafted ' },
+          { highlight: false, tekst: 'sense of asymmetrical details' }
+        ],
         intro: 'The pen stroke touches the pedal. Gentle, like an archeologist brushing forth an ancient art piece. And each brush stroke takes its time in forming. Delicate, and fragile and intricate. As the canvas disappears a youthful woman reveals herself among the flowers. Her twisting hair circles around the page in whiplike motions. All you can do is sit back and watch the artist and the art touch each other.',
         content: [
           { p: true, source: 'Art Nouveau translates from French to New Art. Its personality takes the ornate details of the Victorian era and expands it. All the while rejecting the careless composition of the past. Unlike the Victorian style which meshes together many varying elements, Art Nouveau paints a single picture that on its own fills the frame. Its almost like they took the ornate, floral details of the Victorian style and made the entire piece about that.' },
@@ -52,12 +66,18 @@ export default createStore({
       {
         font: "Noto Serif",
         top: "top: -240px",
-        image:
-          "https://i.imgur.com/dIKwLvZ.png",
         title: "Bauhaus",
         date: "1900-1930",
-        subimg: "https://artsy-media-uploads.s3.amazonaws.com/SRW7eb3GxnwFPPSIwmH1pw%2Fcustom-Custom_Size___joost-schmidt-plakat-zur-bauhaus-asstellung-in-weimar-1923-1923+copy.jpg",
-        hook: 'Art should meet the needs of society and that there should be no distinction between form and function. Thus, the Bauhaus style was marked by the absence of ornamentation and by harmony between the function of an object or a building and its design.',
+        image: require("../assets/themes/bauhaus/ZoranCardulaExample.png"),
+        imageAuthor: require("../assets/themes/bauhaus/ZoranCardula.jpg"),
+        subimg: require("../assets/themes/bauhaus/HerbertBayerExample.jpg"),
+        subimgAuthor: require("../assets/themes/bauhaus/HerbertBayer.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Design should meet the needs of society. There should be no distinction between ' },
+          { highlight: true, tekst: 'form ' },
+          { highlight: false, tekst: 'and ' },
+          { highlight: true, tekst: 'function' }
+        ],
         intro: 'Your front yard has the footprints of military boots. The windows are broken and the street is deserted. The sound of your furniture being ripped to shreds and the commands of Nazi soldiers. They want to stop you from building your houses. But all you can do is turn your back, and go build somewhere else. And as long as there are houses that need to be built they will never be able to stop you.',
         content: [
           { p: true, source: 'Bauhaus was a German art school operating from 1919 to 1933. It arguably marks the first major art schools which approached art as a formal design language. A design language motivated towards the goal of unifying the principles of mass production with  individual artistic vision. It wanted to combine aesthetics with everyday function.' },
@@ -70,12 +90,18 @@ export default createStore({
       {
         font: "artdeco",
         top: "top: 0px",
-        image:
-          "https://philgsblog.files.wordpress.com/2020/08/a1-chicago-art-deco-poster-1929-letter-twitter.jpg",
+        image: require("../assets/themes/deco/AMCassandreexample.jpg"),
+        imageAuthor: require("../assets/themes/deco/AMCassandre.jpg"),
         title: "Art Deco",
         date: "1920-1940",
-        subimg: "https://www.thesprucecrafts.com/thmb/wUBhD18bRqOYdBEFP5kOGFO3mbI=/2786x2100/filters:fill(auto,1)/ArtDeco.Getty-589d34c65f9b58819ccf282d.jpg",
-        hook: 'Visually, the style plays on symmetry and order. Harsh shapes, sharp lines and intricate patterns are all key aspects of the aesthetic. Its unique in the sense that it features a lot of clean and clear lines which can be said to represent control. But unlike most movements which accentuate control it also comes across as handcrafted.',
+        subimg: require("../assets/themes/deco/AMCassandreexample3.jpg"),
+        subimgAuthor: require("../assets/themes/deco/AMCassandre.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Clean and clear lines. But unlike most movements which accentuate ' },
+          { highlight: true, tekst: 'control ' },
+          { highlight: false, tekst: 'it also comes across as handcrafted and ' },
+          { highlight: true, tekst: 'ornate' }
+        ],
         intro: 'A metal man stands over you. His cubical features and sharp lines accentuate his status as a firm, unmovable source of power and wealth. Rich people and expensive cars slowly drift around you. They all seem locked in a permanent cocktail party while in the distance the fumes of industry blackens out the sky. The cheerful chatter fills the cold metal structure with warmth and color. And the ivory and gold patterns on the floor removes any doubt you had in your mind. Youre in the company of the kings and queens of this city.',
         content: [
           { p: true, source: 'Art Deco, sometimes referred to as Deco first appeared in France. It took its name, short for Arts Décoratifs, from the Exposition internationale des arts décoratifs et industriels modernes (International Exhibition of Modern Decorative and Industrial Arts) held in Paris in 1925.' },
@@ -86,12 +112,18 @@ export default createStore({
       {
         font: "Dancing Script",
         top: "top: 0px",
-        image:
-          "https://cdn.britannica.com/79/91479-050-24F98E12/Guernica-canvas-Pablo-Picasso-Madrid-Museo-Nacional-1937.jpg",
+        image: require("../assets/themes/surrealism/Pablo-Picassoexample.jpg"),
+        imageAuthor: require("../assets/themes/surrealism/Pablo-Picasso.jpg"),
         title: "Surrealism",
         date: "1920-1950",
-        subimg: "https://cdn.britannica.com/10/182610-050-77811599/The-Persistence-of-Memory-canvas-collection-Salvador-1931.jpg",
-        hook: 'At its core surrealism is about the aesthetics of the subconscious. The breaking of logic and sense in favor of a raw and unfiltered portrait of your feelings. And this desire to reject tradition and rules and frames in favor of a more human image of your feelings actually makes a lot of sense put up against the backdrop of a pointless war.',
+        subimg: require("../assets/themes/surrealism/HansSchlegerexample.jpg"),
+        subimgAuthor: require("../assets/themes/surrealism/HansSchleger.jpg"),
+        hook: [
+          { highlight: false, tekst: 'The aesthetics of the ' },
+          { highlight: true, tekst: 'subconscious. ' },
+          { highlight: false, tekst: 'The breaking of logic and sense in favor of a raw and unfiltered portrait of your ' },
+          { highlight: true, tekst: 'feelings' }
+        ],
         intro: 'The streets are filled with corpses and your house has been blown to shit by a mindless construction never seen in any war before, a bomber airplane. Your father has lost both his legs and his face looks more like a mashed pie than a human face, but hes still alive. Though, youre not sure if the sounds his face is making is him crying or trying to breathe through the chemical gas slowly eating away at him. Your mother is in silent shock and all thats left of your brothers are arms and legs.',
         content: [
           { p: true, source: 'The first world war was unlike a lot of other wars. Most obviously in the fact that it was the first modern war that was fought by nation states from across the world. But also because it was a war where the trigger for the aggression was very obscure. It started with the assasination of Franz Duke Ferdinand of Belgia by a Serbian nationalist. Belgia criticised Serbia for this incident and Serbia sent a response but Belgia didnt like the response so they went to war. But then most of the other countries joined in because of obligations and alliances, and suddenly, most of Europe where all roped into a random war over an obscure assasination by some random nationalist.' },
@@ -104,12 +136,18 @@ export default createStore({
       {
         font: "Vampiro One",
         top: "top: 0px",
-        image:
-          "https://fahrenheitmagazine.com/sites/default/files/wp-content/uploads/2019/05/portada-pop-art.jpg",
         title: "Pop Art",
         date: "1940-1970",
-        subimg: "https://blog.academyart.edu/wp-content/uploads/2019/05/fine-arts-what-is-pop-art-graffiti.jpg",
-        hook: 'The movement presented a challenge to traditions of fine art by including imagery from popular and mass culture, such as advertising, comic books and mundane mass-produced cultural objects. One of its aims is to use images of popular (as opposed to elitist) culture in art, emphasizing the banal or kitschy elements of any culture, most often through the use of irony.',
+        image: require("../assets/themes/pop/andywarholexample.jpg"),
+        imageAuthor: require("../assets/themes/pop/andywarhol.jpg"),
+        subimg: require("../assets/themes/pop/andywarholdexaple2.jpg"),
+        subimgAuthor: require("../assets/themes/pop/andywarhol.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Emphasizing the banal or ' },
+          { highlight: true, tekst: 'kitschy ' },
+          { highlight: false, tekst: 'elements of culture, most often through the use of ' },
+          { highlight: true, tekst: 'irony' }
+        ],
         intro: 'Drink a beer and watch the lights. The city is full of us. And so are all the rural villages. Which is cool becasue we´re fucking awesome. You buy 15 light bulbs and use them to decorate your car. Thats life. An endless series of random events, and objects; and you, looking at them through broken shades while trying to figure out if Sara likes you or just wants your light bulbs.',
         content: [
           { p: true, source: 'Pop art is an art movement that emerged in the United Kingdom and the United States during the mid- to late-1950s. The movement presented a challenge to traditions of fine art by including imagery from popular and mass culture, such as advertising, comic books and mundane mass-produced cultural objects. One of its aims is to use images of popular (as opposed to elitist) culture in art, emphasizing the banal or kitschy elements of any culture, most often through the use of irony.' },
@@ -122,12 +160,19 @@ export default createStore({
       {
         font: "psy",
         top: "top: 0px",
-        image:
-          "https://lobopopart.com.br/wp-content/uploads/2017/08/Movimento-Psicodelico-dos-anos-60.jpg",
         title: "Psychedelia",
         date: "1960s",
-        subimg: "https://miro.medium.com/max/2732/1*eTTtKjoVXMYV3MbAk6HJlw.jpeg",
-        hook: 'Richly saturated colors in glaring contrast, elaborately ornate lettering, strongly symmetrical composition, collage elements, rubber-like distortions, and bizarre iconography are all hallmarks of the San Francisco psychedelic poster art style.',
+        image: require("../assets/themes/psycedelia/WesWilsonexample.jpg"),
+        imageAuthor: require("../assets/themes/psycedelia/WesWilson.jpg"),
+        subimg: require("../assets/themes/psycedelia/VictorMoscosoexample.jpeg"),
+        subimgAuthor: require("../assets/themes/psycedelia/VictorMoscoso.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Strongly ' },
+          { highlight: true, tekst: 'symmetrical ' },
+          { highlight: false, tekst: 'composition, collage elements, rubber-like ' },
+          { highlight: true, tekst: 'distortions, ' },
+          { highlight: false, tekst: 'and bizarre iconography' }
+        ],
         intro: 'The headless woman is finally done rambling about art history to you when you realize that your legs have ran off and your parrot ate all the papaya. Without hesitation you attempt to jump through the window. But you fall before you get there on account of your lacking legs. Then you realize, as you look down, youre falling towards the street. You were outside the window all along. Although the wind whips past you on your way down a sense of calm sets in your body. You know, the pavement, once you meet it, will offer you nothing but softness, and papaya. Peace and Love.',
         content: [
           { p: true, source: 'Psychedelia was arguably the most political of all the art movements. Steeped in politics such the anti war movement and the hippie crowd. Just like these groups the Psychedelia movement was also characterised with its relationship to drugs. An opening to freedom, experimentation and human rights all come together under these groups. Some of this might be a product, or at least aided by how drugs can make people more open minded. By presenting difficult questions about how certain you are off your own faculties and ideas.' },
@@ -139,12 +184,18 @@ export default createStore({
       {
         font: "swiss",
         top: "top: 0px",
-        image:
-          "https://graphicdesignhistory.akidesign.no/wp-content/uploads/2018/08/swiss-cover.jpg",
         title: "Swiss",
         date: "1940-1980",
-        subimg: "https://i.pinimg.com/originals/e0/d9/dd/e0d9dd303e6f1b4f562d88ddaad36a17.jpg",
-        hook: 'It emphasizes cleanness, readability, and objectivity. The style emerged from a desire to represent information objectively, free from the influence of associated meaning.',
+        image: require("../assets/themes/swiss/Armin_Hofmannexample.jpg"),
+        imageAuthor: require("../assets/themes/swiss/Armin_Hofmann.jpg"),
+        subimg: require("../assets/themes/swiss/Josef_Müller-Brockmannexample.jpg"),
+        subimgAuthor: require("../assets/themes/swiss/Josef_Müller-Brockmannpng.png"),
+        hook: [
+          { highlight: false, tekst: 'Cleanliness and readability. Represent ' },
+          { highlight: true, tekst: 'information ' },
+          { highlight: false, tekst: 'objectively, free from the influence of associated ' },
+          { highlight: true, tekst: 'meaning' }
+        ],
         intro: 'A hundred million sentences fly around you. In a storm, in madness and chaos theres nothing to hold onto. All there is is uncertainty. Until you sit down. And take a breath and get to work. Grids will never fail you. Math is always true. By defining your environment by the power of the holy ruler, chaos will never again disturb your peace.',
         content: [
           { p: true, source: 'The Swiss Style is all about grids. Alight everything to a grid and do it using simple shapes. This form language was so successful that its also known as The International Typographic Style. The reason why its approachable as an international style is because it doesnt hijack the design with any particular voice.' },
@@ -158,12 +209,18 @@ export default createStore({
       {
         font: "Special Elite",
         top: "top: 0px",
-        image:
-          "https://i.ytimg.com/vi/BNdCMOJualM/maxresdefault.jpg",
         title: "Punk New Wave",
         date: "1970-1980",
-        subimg: "https://www.designstreet.com.au/2018-refresh/wp-content/uploads/2018/07/PunkRock_Blog_1200x734.jpg",
-        hook: 'The greatest thing ever said about design was said by David Carson, who is arguably the king of New Wave. “dont confuse legibility with communication” - David Carson. And with this simple quote he has essentially described the entire aesthetic of Punk New Wave.',
+        image: require("../assets/themes/punk/david-carsons-ray-gun.jpg"),
+        imageAuthor: require("../assets/themes/punk/DavidCarson.jpg"),
+        subimg: require("../assets/themes/punk/DavidCarsonexample.jpg"),
+        subimgAuthor: require("../assets/themes/punk/DavidCarson.jpg"),
+        hook: [
+          { highlight: false, tekst: 'Dont confuse ' },
+          { highlight: false, tekst: 'legibility ' },
+          { highlight: false, tekst: 'with ' },
+          { highlight: true, tekst: 'communication ' },
+          { highlight: false, tekst: '- David Carson' }],
         intro: '“Its cheese! Its everywhere. Its in the store. Its on the news. Fucking cheese. Theres a conspiracy of dickwads fucking with my day. Planting cheese all around me. I found a slice of cheese in my pants. My pants!” Your therapist keeps their eye contact with you as she gives off a faint smile. “What I am hearing from you,” she breaks out after a short pause. “Is that the memory you associate with your ex is causing you pain.” ',
         content: [
           { p: true, source: 'The greatest thing ever said about design was said by David Carson, who is arguably the king of New Wave. “dont confuse legibility with communication” - David Carson. And with this simple quote he has essentially described the entire aesthetic of Punk New Wave. What you are communicating is not always the literal interpretation of your words directly. But a rather underlying feeling of what you are showing me.' },
@@ -177,12 +234,18 @@ export default createStore({
       {
         font: "Press Start 2P",
         top: "top: 0px",
-        image:
-          "https://thumbs-prod.si-cdn.com/n-21IFTRkKZGMZVz-sXxo2lLeI0=/fit-in/1072x0/https://public-media.si-cdn.com/filer/91/bf/91bf79d7-1edf-4c76-b434-0c20a4210e47/susankare01_apple_macintosh_computer_icons_examples.jpg",
         title: "Flat",
         date: "2010 - Now",
-        subimg: "https://www.contentharmony.com/files/2015/11/Gandour-041.jpg",
-        hook: 'Flat design is a minimalist design language or design style commonly used in graphical user interfaces (GUI) (such as web applications and mobile apps). Today it dominates branding and the web in particular. It emphasizes minimalist use of simple elements, typography and flat colors. ',
+        image: require("../assets/themes/flat/susankare_examples.jpg"),
+        imageAuthor: require("../assets/themes/flat/susanekareperson.jpg"),
+        subimg: require("../assets/themes/flat/stevejobs.jpeg"),
+        subimgAuthor: require("../assets/themes/flat/susanekareperson.jpg"),
+        hook: [
+          { highlight: false, tekst: 'The ' },
+          { highlight: true, tekst: 'dominating ' },
+          { highlight: false, tekst: 'voice in user interfaces. The simple, readable and ' },
+          { highlight: true, tekst: 'unprovoking' }
+        ],
         intro: 'The tiny square box. No bigger than a shopping basket. Sits on your desk staring back at you as you lean in closer. The digital text on the screen seems to come out of nowhere. Not quite sure what good it will do you, but you cant help but be in awe. Theres a cultural energy that you have picked up from all your friends. Nobody understands the extent of it. But everyone knows that life will never be the same now that these “computers” can fit in your living room.',
         content: [
           { p: true, source: 'Flat design is a minimalist design language or design style commonly used in graphical user interfaces (GUI) (such as web applications and mobile apps). Today it dominates branding and the web in particular. It emphasizes minimalist use of simple elements, typography and flat colors. Designers may prefer flat design because it allows interface designs to be more streamlined and efficient. It is easier to quickly convey information while still looking visually appealing and approachable.' },
@@ -264,7 +327,7 @@ export default createStore({
     _gsapScroll(context, { el, time }) {
       gsap.to(window, {
         duration: time,
-        scrollTo: { y: el, offsetY: 200, autoKill: false },
+        scrollTo: { y: el, offsetY: 400, autoKill: false },
         ease: true,
       });
     },
@@ -275,6 +338,7 @@ export default createStore({
       context.dispatch("_killTrigger", "navToggle");
       context.dispatch("_killTrigger", "gate");
       context.dispatch("_killTrigger", "eye");
+      context.commit("resetRef");
 
       //Make sure the right target is on
       if (target) {
