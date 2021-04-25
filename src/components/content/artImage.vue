@@ -1,13 +1,5 @@
 <template>
-  <div
-    class="box"
-    @click="
-      $store.dispatch('artickleClicked', {
-        el: $event.currentTarget,
-        toggle: true,
-      })
-    "
-  >
+  <div class="box" @click="toggleExpanded($event.currentTarget)">
     <div class="text" :class="{ extra: art.title == 'Punk New Wave' }">
       <h1 :style="getFontStyle(art.font)">
         {{ art.title }}
@@ -15,12 +7,14 @@
       <h2>{{ art.date }}</h2>
     </div>
     <div class="imgFrame">
-      <img :style="art.top" :src="art.image" />
+      <img :style="art.top" :src="art.img.main.image" />
     </div>
   </div>
 </template>
 
 <script>
+import disableScroll from "disable-scroll";
+
 export default {
   name: "artImage",
   props: {
@@ -30,6 +24,16 @@ export default {
     getFontStyle(font) {
       let style = "--font: " + font + ";";
       return style;
+    },
+    toggleExpanded(el) {
+      disableScroll.on();
+      this.$store.dispatch("artickleClicked", {
+        el: el,
+        toggle: true,
+      });
+      setTimeout(() => {
+        disableScroll.off();
+      }, 2000);
     },
   },
 };
@@ -125,6 +129,9 @@ h2 {
   p {
     pointer-events: none;
   }
+  &.extra {
+    width: 40em;
+  }
 }
 
 .artickleContainer .imgFrame {
@@ -195,6 +202,9 @@ h2 {
 
 .expanded .text {
   transform: translateY(-320px);
+  &.extra {
+    width: auto;
+  }
   @media only screen and (max-width: 1300px) {
     transform: translateY(calc(-150px - 10vw));
     &.extra {

@@ -9,7 +9,7 @@
         >{{ beat.tekst }}
       </span>
     </p>
-    <img :src="art.subimg" />
+    <img :src="art.img.sub.image" />
     <p class="content">
       <span
         class="paragraph"
@@ -60,8 +60,8 @@ export default {
     font-weight: 900;
     max-width: 100%;
     margin: 0px;
-    padding-top: 1em;
-    padding-bottom: 2em;
+    padding-top: 2em;
+    padding-bottom: 3em;
     transform: translateY(-80%);
     transition: transform 0.4s ease-in-out;
     @media only screen and (max-width: 450px) {
@@ -86,7 +86,7 @@ export default {
     column-count: 2;
     width: 0%;
     height: 0%;
-    //overflow: hidden;
+    overflow: hidden;
     span {
       color: var(--details);
     }

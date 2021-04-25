@@ -19,12 +19,18 @@ export default createStore({
       {
         font: "victorian",
         top: "top: 0px",
-        image: require("../assets/themes/victorian/uknown.jpg"),
-        imageAuthor: require("../assets/themes/victorian/Victoria.jpg"),
         title: "Victorian",
         date: "1837-1901",
-        subimg: require("../assets/themes/victorian/unknown.jpg"),
-        subimgAuthor: require("../assets/themes/victorian/Victoria.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/victorian/uknown.jpg"),
+            author: require("../assets/themes/victorian/Victoria.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/victorian/unknown.jpg"),
+            author: require("../assets/themes/victorian/Victoria.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Ornamentation and variation of shape and size. ' },
           { highlight: true, tekst: 'Fill ' },
@@ -42,12 +48,18 @@ export default createStore({
       {
         font: "Kaoly",
         top: "top: 0px",
-        image: require("../assets/themes/nouveau/muchaexample2.jpg"),
-        imageAuthor: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
         title: "Art Nouveau",
         date: "1890-1920",
-        subimg: require("../assets/themes/nouveau/muchaexample.jpg"),
-        subimgAuthor: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/nouveau/muchaexample2.jpg"),
+            author: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/nouveau/muchaexample.jpg"),
+            author: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Perhaps a ' },
           { highlight: true, tekst: 'natural ' },
@@ -68,10 +80,16 @@ export default createStore({
         top: "top: -240px",
         title: "Bauhaus",
         date: "1900-1930",
-        image: require("../assets/themes/bauhaus/ZoranCardulaExample.png"),
-        imageAuthor: require("../assets/themes/bauhaus/ZoranCardula.jpg"),
-        subimg: require("../assets/themes/bauhaus/HerbertBayerExample.jpg"),
-        subimgAuthor: require("../assets/themes/bauhaus/HerbertBayer.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/bauhaus/ZoranCardulaExample.png"),
+            author: require("../assets/themes/bauhaus/ZoranCardula.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/bauhaus/HerbertBayerExample.jpg"),
+            author: require("../assets/themes/bauhaus/HerbertBayer.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Design should meet the needs of society. There should be no distinction between ' },
           { highlight: true, tekst: 'form ' },
@@ -90,12 +108,18 @@ export default createStore({
       {
         font: "artdeco",
         top: "top: 0px",
-        image: require("../assets/themes/deco/AMCassandreexample.jpg"),
-        imageAuthor: require("../assets/themes/deco/AMCassandre.jpg"),
         title: "Art Deco",
         date: "1920-1940",
-        subimg: require("../assets/themes/deco/AMCassandreexample3.jpg"),
-        subimgAuthor: require("../assets/themes/deco/AMCassandre.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/deco/AMCassandreexample.jpg"),
+            author: require("../assets/themes/deco/AMCassandre.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/deco/AMCassandreexample3.jpg"),
+            author: require("../assets/themes/deco/AMCassandre.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Clean and clear lines. But unlike most movements which accentuate ' },
           { highlight: true, tekst: 'control ' },
@@ -112,12 +136,18 @@ export default createStore({
       {
         font: "Dancing Script",
         top: "top: 0px",
-        image: require("../assets/themes/surrealism/Pablo-Picassoexample.jpg"),
-        imageAuthor: require("../assets/themes/surrealism/Pablo-Picasso.jpg"),
         title: "Surrealism",
         date: "1920-1950",
-        subimg: require("../assets/themes/surrealism/HansSchlegerexample.jpg"),
-        subimgAuthor: require("../assets/themes/surrealism/HansSchleger.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/surrealism/Pablo-Picassoexample.jpg"),
+            author: require("../assets/themes/surrealism/Pablo-Picasso.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/surrealism/HansSchlegerexample.jpg"),
+            author: require("../assets/themes/surrealism/HansSchleger.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'The aesthetics of the ' },
           { highlight: true, tekst: 'subconscious. ' },
@@ -138,10 +168,16 @@ export default createStore({
         top: "top: 0px",
         title: "Pop Art",
         date: "1940-1970",
-        image: require("../assets/themes/pop/andywarholexample.jpg"),
-        imageAuthor: require("../assets/themes/pop/andywarhol.jpg"),
-        subimg: require("../assets/themes/pop/andywarholdexaple2.jpg"),
-        subimgAuthor: require("../assets/themes/pop/andywarhol.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/pop/andywarholexample.jpg"),
+            author: require("../assets/themes/pop/andywarhol.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/pop/andywarholdexaple2.jpg"),
+            author: require("../assets/themes/pop/andywarhol.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Emphasizing the banal or ' },
           { highlight: true, tekst: 'kitschy ' },
@@ -162,10 +198,16 @@ export default createStore({
         top: "top: 0px",
         title: "Psychedelia",
         date: "1960s",
-        image: require("../assets/themes/psycedelia/WesWilsonexample.jpg"),
-        imageAuthor: require("../assets/themes/psycedelia/WesWilson.jpg"),
-        subimg: require("../assets/themes/psycedelia/VictorMoscosoexample.jpeg"),
-        subimgAuthor: require("../assets/themes/psycedelia/VictorMoscoso.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/psycedelia/WesWilsonexample.jpg"),
+            author: require("../assets/themes/psycedelia/WesWilson.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/psycedelia/VictorMoscosoexample.jpeg"),
+            author: require("../assets/themes/psycedelia/VictorMoscoso.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Strongly ' },
           { highlight: true, tekst: 'symmetrical ' },
@@ -186,10 +228,16 @@ export default createStore({
         top: "top: 0px",
         title: "Swiss",
         date: "1940-1980",
-        image: require("../assets/themes/swiss/Armin_Hofmannexample.jpg"),
-        imageAuthor: require("../assets/themes/swiss/Armin_Hofmann.jpg"),
-        subimg: require("../assets/themes/swiss/Josef_Müller-Brockmannexample.jpg"),
-        subimgAuthor: require("../assets/themes/swiss/Josef_Müller-Brockmannpng.png"),
+        img: {
+          main: {
+            image: require("../assets/themes/swiss/Armin_Hofmannexample.jpg"),
+            author: require("../assets/themes/swiss/Armin_Hofmann.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/swiss/Josef_Müller-Brockmannexample.jpg"),
+            author: require("../assets/themes/swiss/Josef_Müller-Brockmannpng.png"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Cleanliness and readability. Represent ' },
           { highlight: true, tekst: 'information ' },
@@ -211,10 +259,16 @@ export default createStore({
         top: "top: 0px",
         title: "Punk New Wave",
         date: "1970-1980",
-        image: require("../assets/themes/punk/david-carsons-ray-gun.jpg"),
-        imageAuthor: require("../assets/themes/punk/DavidCarson.jpg"),
-        subimg: require("../assets/themes/punk/DavidCarsonexample.jpg"),
-        subimgAuthor: require("../assets/themes/punk/DavidCarson.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/punk/david-carsons-ray-gun.jpg"),
+            author: require("../assets/themes/punk/DavidCarson.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/punk/DavidCarsonexample.jpg"),
+            author: require("../assets/themes/punk/DavidCarson.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'Dont confuse ' },
           { highlight: false, tekst: 'legibility ' },
@@ -236,10 +290,16 @@ export default createStore({
         top: "top: 0px",
         title: "Flat",
         date: "2010 - Now",
-        image: require("../assets/themes/flat/susankare_examples.jpg"),
-        imageAuthor: require("../assets/themes/flat/susanekareperson.jpg"),
-        subimg: require("../assets/themes/flat/stevejobs.jpeg"),
-        subimgAuthor: require("../assets/themes/flat/susanekareperson.jpg"),
+        img: {
+          main: {
+            image: require("../assets/themes/flat/susankare_examples.jpg"),
+            author: require("../assets/themes/flat/susanekareperson.jpg"),
+          },
+          sub: {
+            image: require("../assets/themes/flat/stevejobs.jpeg"),
+            author: require("../assets/themes/flat/susanekareperson.jpg"),
+          }
+        },
         hook: [
           { highlight: false, tekst: 'The ' },
           { highlight: true, tekst: 'dominating ' },
