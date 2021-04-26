@@ -1,6 +1,6 @@
 <template>
   <div class="art">
-    <div class="mainAuthor">
+    <div class="mainAuthor" v-if="mode">
       <authorComp
         :compact="true"
         :imageX="art.img.main.author" 
@@ -17,9 +17,10 @@
           >{{ beat.tekst }}
         </span>
       </p>
-      <div class="subBanner">
+      <div class="subBanner" v-if="mode">
         <img :src="art.img.sub.image" />
         <authorComp
+          v-if="mode"
           :imageX="art.img.sub.author" 
           :authorX="art.img.sub.authorName"
         />
