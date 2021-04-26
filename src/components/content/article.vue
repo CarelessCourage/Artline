@@ -1,6 +1,6 @@
 <template>
   <div class="art">
-    <div class="mainAuthor">
+    <div class="mainAuthor" v-if="mode">
       <authorComp
         :compact="true"
         :imageX="art.img.main.author" 

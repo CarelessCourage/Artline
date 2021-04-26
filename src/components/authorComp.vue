@@ -45,7 +45,6 @@ export default {
  padding-left: 2em;
  padding-bottom: 1em;
  display: flex;
- //justify-content: flex-end;
  align-items: center;
  position: relative;
  margin-top: -2em;
