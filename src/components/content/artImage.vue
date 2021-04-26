@@ -7,14 +7,13 @@
       <h2>{{ art.date }}</h2>
     </div>
     <div class="imgFrame">
-      <img :style="art.top" :src="art.img.main.image" />
+      <img id="banner" :style="art.top" :src="art.img.main.image" />
     </div>
   </div>
 </template>
 
 <script>
 import disableScroll from "disable-scroll";
-
 export default {
   name: "artImage",
   props: {
@@ -44,6 +43,11 @@ export default {
 $bg: #3d405b;
 $bg2: #f4f1de;
 $mg: mix($bg, $bg2, 50%);
+
+
+.author {
+  position: absolute;
+}
 
 h1 {
   --font: "Dancing Script";
@@ -110,7 +114,7 @@ h2 {
   }
   @media only screen and (max-width: 870px) {
     height: 10em;
-    img {
+    img#banner {
       opacity: 0.1;
     }
     h1 {
@@ -184,7 +188,7 @@ h2 {
 
 .expanded .imgFrame {
   transition: 0.4s;
-  img {
+  img#banner {
     transition: 0.4s;
     opacity: 1;
     &:hover {
@@ -194,7 +198,7 @@ h2 {
   }
   &:hover {
     background: var(--special);
-    img {
+    img#banner {
       opacity: 0.5;
     }
   }

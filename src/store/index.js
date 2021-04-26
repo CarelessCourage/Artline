@@ -93,7 +93,7 @@ export default createStore({
           sub: {
             image: require("../assets/themes/bauhaus/HerbertBayerExample.jpg"),
             author: require("../assets/themes/bauhaus/HerbertBayer.jpg"),
-            authorName: "Zoran Cardula",
+            authorName: "Herbert Bayer",
           }
         },
         hook: [
@@ -155,7 +155,7 @@ export default createStore({
           sub: {
             image: require("../assets/themes/surrealism/HansSchlegerexample.jpg"),
             author: require("../assets/themes/surrealism/HansSchleger.jpg"),
-            authorName: "Pablo Picasso",
+            authorName: "Hans Schleger",
           }
         },
         hook: [
@@ -219,7 +219,7 @@ export default createStore({
           sub: {
             image: require("../assets/themes/psycedelia/VictorMoscosoexample.jpeg"),
             author: require("../assets/themes/psycedelia/VictorMoscoso.jpg"),
-            authorName: "Wes Wilson",
+            authorName: "Victor Moscoso",
           }
         },
         hook: [
@@ -251,7 +251,7 @@ export default createStore({
           sub: {
             image: require("../assets/themes/swiss/Josef_Müller-Brockmannexample.jpg"),
             author: require("../assets/themes/swiss/Josef_Müller-Brockmannpng.png"),
-            authorName: "Armin Hofmann",
+            authorName: "Josef Müller Brockmann",
           }
         },
         hook: [

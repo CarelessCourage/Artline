@@ -1,41 +1,53 @@
 <template>
   <div class="art">
-    <p class="intro">
-      <span
-        class="beat"
-        v-for="(beat, index) in art.hook"
-        :key="index"
-        :class="{ highlight: beat.highlight }"
-        >{{ beat.tekst }}
-      </span>
-    </p>
-    <img :src="art.img.sub.image" />
-    <div class="author">
-      <div class="tekst">
-        <p>image by</p>
-        <p>{{art.img.sub.authorName}}</p>
-      </div>
-      <img :src="art.img.sub.author" alt="">
+    <div class="mainAuthor">
+      <authorComp
+        :compact="true"
+        :imageX="art.img.main.author" 
+        :authorX="art.img.main.authorName"
+      />
     </div>
-    <p class="content">
-      <span
-        class="paragraph"
-        :style="getFontStyle(art.font)"
-        v-for="(paragraph, index) in art.content"
-        :key="index"
-        >{{ paragraph.source }}
-        <hr />
-      </span>
-    </p>
+    <div class="overflow">
+      <p class="intro">
+        <span
+          class="beat"
+          v-for="(beat, index) in art.hook"
+          :key="index"
+          :class="{ highlight: beat.highlight }"
+          >{{ beat.tekst }}
+        </span>
+      </p>
+      <div class="subBanner">
+        <img :src="art.img.sub.image" />
+        <authorComp
+          :imageX="art.img.sub.author" 
+          :authorX="art.img.sub.authorName"
+        />
+      </div>
+      <p class="content">
+        <span
+          class="paragraph"
+          :style="getFontStyle(art.font)"
+          v-for="(paragraph, index) in art.content"
+          :key="index"
+          >{{ paragraph.source }}
+          <hr />
+        </span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
+import authorComp from "../authorComp";
 export default {
   name: "article",
   props: {
     art: Object,
     mode: Boolean,
+  },
+  components: {
+    authorComp
   },
   methods: {
     getFontStyle(font) {
@@ -48,39 +60,25 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.art .author {
- background: var(--details);
- color: var(--bg);
- border-radius: .5em;
- height: 3em;
- min-width: 12em;
- padding: .5em;
- padding-right: 1em;
- padding-left: 3em;
- padding-bottom: 1em;
- float: right;
- display: flex;
- //justify-content: flex-end;
- align-items: center;
- position: relative;
- z-index: 5;
- top: -2em;
- img {
-   width: 5em;
-   height: 5em;
-   border-radius: 100%;
-   border: solid 3px var(--special);
+.art .mainAuthor .author {
+  bottom: auto;
+  right: auto;
+  top: -0em;
+  left: 0em;
+}
+
+.overflow {
    overflow: hidden;
- }
- .tekst {
-   margin-right: 1.5em;
-   p {
-     margin: 0px;
-   }
-    p:nth-of-type(1) {
-      opacity: .4;
-    }
- }
+}
+
+.art .subBanner {
+  position: relative;
+  .author {
+    bottom: 0em;
+    right: 0em;
+    top: auto;
+    left: auto;
+  }
 }
 
 .art {
@@ -88,7 +86,6 @@ export default {
   max-width: 100%;
   width: 75em;
   margin: auto;
-  overflow: hidden;
   box-sizing: border-box;
   transition: 1s;
   p {
