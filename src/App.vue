@@ -1,13 +1,10 @@
 <template>
+  
   <intro />
-
   <gate :enter="true" />
 
   <section style="position: relative; z-index: 10">
     <artickles />
-    <transition name="leaveBtn">
-      <leaveBtn v-if="$store.state.mode && false" />
-    </transition>
   </section>
 
   <transition name="nav">
@@ -30,8 +27,7 @@ gsap.registerPlugin(ScrollTrigger);
 import navigation from "./components/navigation";
 import intro from "./components/intro";
 import artickles from "./components/content/artickles";
-import gate from "./components/gate";
-import leaveBtn from "./components/leaveBtn";
+import gate from "./components/gate/gate";
 
 export default {
   name: "app",
@@ -40,7 +36,6 @@ export default {
     intro,
     artickles,
     gate,
-    leaveBtn,
   },
   methods: {
     refresh() {
@@ -49,11 +44,11 @@ export default {
   },
   mounted() {
     this.$store.dispatch("_setGSAP_nav");
-    /*gsap.to(window, {
+    gsap.to(window, {
       duration: 2,
       scrollTo: { y: 0, offsetY: 0, autoKill: false },
       ease: true,
-    });*/
+    });
     this.refresh();
     window.addEventListener("resize", () => this.refresh());
   },
@@ -223,25 +218,6 @@ span {
   }
   100% {
     transform: translateY(0);
-  }
-}
-
-.leaveBtn-leave-active {
-  animation: leaveBtn 1s reverse;
-}
-
-.leaveBtn-enter-active {
-  animation: leaveBtn 1s;
-}
-
-@keyframes leaveBtn {
-  0% {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0px);
   }
 }
 </style>

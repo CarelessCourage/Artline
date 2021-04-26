@@ -146,7 +146,7 @@ export default {
 .tooltips {
   background: var(--details);
   padding: 1em;
-  border-radius: 1em;
+  border-radius: 1em; 
   opacity: 0.7;
   position: fixed;
   position: absolute;
@@ -155,7 +155,6 @@ export default {
   left: 0px;
   right: 0px;
   width: 14em;
-  height: 14em;
   margin: auto;
   display: flex;
   justify-content: center;

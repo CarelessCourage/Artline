@@ -10,6 +10,13 @@
       </span>
     </p>
     <img :src="art.img.sub.image" />
+    <div class="author">
+      <div class="tekst">
+        <p>image by</p>
+        <p>{{art.img.sub.authorName}}</p>
+      </div>
+      <img :src="art.img.sub.author" alt="">
+    </div>
     <p class="content">
       <span
         class="paragraph"
@@ -41,6 +48,41 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.art .author {
+ background: var(--details);
+ color: var(--bg);
+ border-radius: .5em;
+ height: 3em;
+ min-width: 12em;
+ padding: .5em;
+ padding-right: 1em;
+ padding-left: 3em;
+ padding-bottom: 1em;
+ float: right;
+ display: flex;
+ //justify-content: flex-end;
+ align-items: center;
+ position: relative;
+ z-index: 5;
+ top: -2em;
+ img {
+   width: 5em;
+   height: 5em;
+   border-radius: 100%;
+   border: solid 3px var(--special);
+   overflow: hidden;
+ }
+ .tekst {
+   margin-right: 1.5em;
+   p {
+     margin: 0px;
+   }
+    p:nth-of-type(1) {
+      opacity: .4;
+    }
+ }
+}
+
 .art {
   max-height: 0em;
   max-width: 100%;

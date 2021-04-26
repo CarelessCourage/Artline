@@ -25,10 +25,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/victorian/uknown.jpg"),
             author: require("../assets/themes/victorian/Victoria.jpg"),
+            authorName: "unknown",
           },
           sub: {
             image: require("../assets/themes/victorian/unknown.jpg"),
             author: require("../assets/themes/victorian/Victoria.jpg"),
+            authorName: "unknown",
           }
         },
         hook: [
@@ -54,10 +56,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/nouveau/muchaexample2.jpg"),
             author: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+            authorName: "Alphonse Mucha",
           },
           sub: {
             image: require("../assets/themes/nouveau/muchaexample.jpg"),
             author: require("../assets/themes/nouveau/AlphonseMucha.jpg"),
+            authorName: "Alphonse Mucha",
           }
         },
         hook: [
@@ -84,10 +88,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/bauhaus/ZoranCardulaExample.png"),
             author: require("../assets/themes/bauhaus/ZoranCardula.jpg"),
+            authorName: "Zoran Cardula",
           },
           sub: {
             image: require("../assets/themes/bauhaus/HerbertBayerExample.jpg"),
             author: require("../assets/themes/bauhaus/HerbertBayer.jpg"),
+            authorName: "Zoran Cardula",
           }
         },
         hook: [
@@ -114,10 +120,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/deco/AMCassandreexample.jpg"),
             author: require("../assets/themes/deco/AMCassandre.jpg"),
+            authorName: "A.M. Cassandre",
           },
           sub: {
             image: require("../assets/themes/deco/AMCassandreexample3.jpg"),
             author: require("../assets/themes/deco/AMCassandre.jpg"),
+            authorName: "A.M. Cassandre",
           }
         },
         hook: [
@@ -142,10 +150,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/surrealism/Pablo-Picassoexample.jpg"),
             author: require("../assets/themes/surrealism/Pablo-Picasso.jpg"),
+            authorName: "Pablo Picasso",
           },
           sub: {
             image: require("../assets/themes/surrealism/HansSchlegerexample.jpg"),
             author: require("../assets/themes/surrealism/HansSchleger.jpg"),
+            authorName: "Pablo Picasso",
           }
         },
         hook: [
@@ -172,10 +182,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/pop/andywarholexample.jpg"),
             author: require("../assets/themes/pop/andywarhol.jpg"),
+            authorName: "Andy Warhol",
           },
           sub: {
             image: require("../assets/themes/pop/andywarholdexaple2.jpg"),
             author: require("../assets/themes/pop/andywarhol.jpg"),
+            authorName: "Andy Warhol",
           }
         },
         hook: [
@@ -202,10 +214,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/psycedelia/WesWilsonexample.jpg"),
             author: require("../assets/themes/psycedelia/WesWilson.jpg"),
+            authorName: "Wes Wilson",
           },
           sub: {
             image: require("../assets/themes/psycedelia/VictorMoscosoexample.jpeg"),
             author: require("../assets/themes/psycedelia/VictorMoscoso.jpg"),
+            authorName: "Wes Wilson",
           }
         },
         hook: [
@@ -232,10 +246,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/swiss/Armin_Hofmannexample.jpg"),
             author: require("../assets/themes/swiss/Armin_Hofmann.jpg"),
+            authorName: "Armin Hofmann",
           },
           sub: {
             image: require("../assets/themes/swiss/Josef_Müller-Brockmannexample.jpg"),
             author: require("../assets/themes/swiss/Josef_Müller-Brockmannpng.png"),
+            authorName: "Armin Hofmann",
           }
         },
         hook: [
@@ -263,10 +279,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/punk/david-carsons-ray-gun.jpg"),
             author: require("../assets/themes/punk/DavidCarson.jpg"),
+            authorName: "David Carson",
           },
           sub: {
             image: require("../assets/themes/punk/DavidCarsonexample.jpg"),
             author: require("../assets/themes/punk/DavidCarson.jpg"),
+            authorName: "David Carson",
           }
         },
         hook: [
@@ -294,10 +312,12 @@ export default createStore({
           main: {
             image: require("../assets/themes/flat/susankare_examples.jpg"),
             author: require("../assets/themes/flat/susanekareperson.jpg"),
+            authorName: "Susane Kare",
           },
           sub: {
             image: require("../assets/themes/flat/stevejobs.jpeg"),
             author: require("../assets/themes/flat/susanekareperson.jpg"),
+            authorName: "Susane Kare",
           }
         },
         hook: [
