@@ -29,6 +29,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.expanded .art .author {
+  opacity: 1;
+  transform: translateY(0em);
+}
+
 .art .author {
  background: var(--details);
  color: var(--bg);
@@ -45,6 +50,9 @@ export default {
  position: relative;
  margin-top: -2em;
  z-index: 5;
+ opacity: 0;
+ transform: translateY(10em);
+ transition: .4s ease-in-out;
  img {
    width: 5em;
    height: 5em;
