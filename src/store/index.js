@@ -365,26 +365,14 @@ export default createStore({
     pushGate(state, payload) {
       state.gsap_gates.push(payload)
     },
-    resetGates(state) {
-      //this one is not in use right now. Might delete
-      state.gsap_gates = []
-    }
   },
   actions: {
     artickleClicked(context, { el, toggle }) {
-      //let parent = el.parentElement;
       let title = el.getAttribute("id");
 
       if (!toggle) {
         context.dispatch("_gsapScroll", { el: el, time: 2 });
         context.commit("titleChange", title);
-        //context.commit("modeChange", true);
-        //context.dispatch("_resetGSAP", title);
-        //setTimeout(() => {
-        //  context.dispatch("_gsapScroll", { el: parent, time: 2 });
-        //  //context.dispatch("_resetGSAP", title);
-        //  context.commit("titleChange", title);
-        //}, 2000);
       } else {
         context.commit("modeToggle");
         context.dispatch("_interval", el);
@@ -397,7 +385,7 @@ export default createStore({
       var interval = setInterval(function () {
         context.commit("titleChange", title);
         context.dispatch("_gsapScroll", { el: el, time: 0.01 });
-      }, 0.00001);
+      }, 0.0000001);
       setTimeout(() => {
         clearInterval(interval);
         context.dispatch("_resetGSAP", title);
@@ -447,12 +435,6 @@ export default createStore({
 
     _resetGates(context) {
       context.dispatch("_killTrigger", "gate");
-      //context.dispatch("_resetGate");
-
-      //let gates = context.state.gsap_gates;
-      //gates.forEach((gate) => {
-      //  context.dispatch("_setGate", gate);
-      //});
     },
 
     _setGate(context, gate) {

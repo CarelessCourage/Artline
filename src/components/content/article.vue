@@ -1,9 +1,9 @@
 <template>
-  <div class="art">
-    <div class="mainAuthor" v-if="mode">
+  <div class="art" :class="{ overview: !mode }">
+    <div class="mainAuthor">
       <authorComp
         :compact="true"
-        :imageX="art.img.main.author" 
+        :imageX="art.img.main.author"
         :authorX="art.img.main.authorName"
       />
     </div>
@@ -17,15 +17,14 @@
           >{{ beat.tekst }}
         </span>
       </p>
-      <div class="subBanner" v-if="mode">
+      <div class="subBanner" @click="temp = !temp">
         <img :src="art.img.sub.image" />
         <authorComp
-          v-if="mode"
-          :imageX="art.img.sub.author" 
+          :imageX="art.img.sub.author"
           :authorX="art.img.sub.authorName"
         />
       </div>
-      <p class="content">
+      <p class="content" :class="{ on: temp }">
         <span
           class="paragraph"
           :style="getFontStyle(art.font)"
@@ -48,7 +47,12 @@ export default {
     mode: Boolean,
   },
   components: {
-    authorComp
+    authorComp,
+  },
+  data: function () {
+    return {
+      temp: false,
+    };
   },
   methods: {
     getFontStyle(font) {
@@ -66,14 +70,31 @@ export default {
   right: auto;
   top: -0em;
   left: 0em;
+  transform: translateX(-0%);
+  transition: 0.4s ease-in-out;
+}
+
+.mainAuthor {
+  transition: 0.4s ease-in-out;
+}
+
+.overview .mainAuthor {
+  transform: translateX(-50%);
+  .author {
+    height: 0px;
+    padding: 0px;
+  }
 }
 
 .overflow {
-   overflow: hidden;
+  overflow: hidden;
 }
 
 .art .subBanner {
   position: relative;
+  overflow: hidden;
+  max-height: 100%;
+  transition: 0.4s ease-in-out;
   .author {
     bottom: 0em;
     right: 0em;
@@ -99,11 +120,12 @@ export default {
     line-height: 1em;
     font-weight: 900;
     max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
     margin: 0px;
-    padding-top: 2em;
-    padding-bottom: 3em;
-    transform: translateY(-80%);
-    transition: transform 0.4s ease-in-out;
+    transform: translateY(0);
+    transition: 1s ease-in-out;
+
     @media only screen and (max-width: 450px) {
       width: 100%;
     }
@@ -124,9 +146,8 @@ export default {
   .content {
     margin-top: 5em;
     column-count: 2;
-    width: 0%;
-    height: 0%;
     overflow: hidden;
+    transition: 0.4s ease-in-out;
     span {
       color: var(--details);
     }
@@ -176,13 +197,63 @@ export default {
 .expanded .art {
   max-height: 200em;
   padding: 2em;
+  padding-top: 0em;
   padding-bottom: 0.5em;
   .intro {
-    transform: translateY(-0%);
+    padding-top: 2em;
+    padding-bottom: 3em;
+    overflow: hidden;
+    opacity: 1;
+  }
+  .subBanner {
+    img {
+      height: 15em;
+    }
   }
   .content {
-    width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 100%;
+  }
+}
+
+.classic .art {
+  .intro {
+    transform: translateY(-10em);
+    max-height: 0px;
+    padding: 0px;
+    opacity: 0;
+  }
+  .subBanner {
+    max-height: 0%;
+    opacity: 0;
+    img {
+      height: 0px;
+    }
+  }
+  .content {
+    opacity: 0;
+    margin: 0px;
+    height: 0px !important;
+    max-height: 0% !important;
+  }
+}
+
+.content {
+  height: 45em !important;
+  max-height: 15em;
+  span {
+    transition: 0.4s;
+  }
+}
+
+.on.content {
+  margin: 0px;
+  height: 0px !important;
+  max-height: 0% !important;
+  span {
+    margin: 0px;
+    height: 0px !important;
+    max-height: 0% !important;
   }
 }
 </style>

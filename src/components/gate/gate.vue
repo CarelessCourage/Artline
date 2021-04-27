@@ -438,6 +438,7 @@
           />
         </svg>
       </div>
+      <terrain v-if="false" />
     </div>
   </div>
 </template>
@@ -451,11 +452,13 @@ import { TweenMax, Power2 } from "gsap";
 gsap.registerPlugin(ScrollTrigger, ExpoScaleEase, TweenMax, Power2);
 
 import toggleEye from "./toggleEye";
+import terrain from "./terrain";
 
 export default {
   name: "gate",
   components: {
     toggleEye,
+    terrain,
   },
   props: {
     enter: {

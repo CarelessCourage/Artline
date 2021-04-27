@@ -1,10 +1,13 @@
 <template>
   <transition name="enterPar">
     <div
-      v-show="!mode"
       data-speed=".2"
       class="paralax"
-      :class="{ hoverOffBox: !hoverOnBox, hoverOnBox: hoverOnBox }"
+      :class="{
+        hoverOffBox: !hoverOnBox,
+        hoverOnBox: hoverOnBox,
+        overview: mode,
+      }"
     >
       <div class="bg">
         <h2>{{ art.date }}</h2>
@@ -36,34 +39,7 @@ export default {
   props: {
     art: Object,
     hoverOnBox: Boolean,
-  },
-  computed: {
-    mode() {
-      return this.$store.state.mode;
-    },
-  },
-  mounted() {
-    ScrollTrigger.defaults({
-      toggleActions: "restart pause resume none",
-    });
-    this.startParalax();
-    this.$store.dispatch("_resetGSAP");
-  },
-  methods: {
-    startParalax() {
-      this.$store.state.itemRefs.forEach((el) => {
-        gsap.to(el.querySelector(".paralax"), {
-          scrollTrigger: {
-            trigger: el,
-            id: "paralax",
-            scrub: 1,
-          },
-          y: (i, target) =>
-            (-ScrollTrigger.maxScroll(window) * target.dataset.speed) / 2,
-          ease: "none",
-        });
-      });
-    },
+    mode: Boolean,
   },
 };
 </script>
@@ -116,7 +92,6 @@ $mg: mix($bg, $bg2, 50%);
     color: var(--details);
   }
   .highlight {
-    //color: var(--special);
     opacity: 0.4;
     font-weight: 900;
   }
@@ -124,13 +99,10 @@ $mg: mix($bg, $bg2, 50%);
     font-size: 3em;
     color: $mg;
     margin: 0px;
-    width: 7em;
-    //text-align: center;
     position: absolute;
     top: 8vw;
     transform: rotate(90deg);
     transition: 0.4s ease-in-out;
-    //background-color: red;
   }
   &.hoverOnBox .line {
     opacity: 0;
@@ -158,6 +130,10 @@ $mg: mix($bg, $bg2, 50%);
         h2 {
           opacity: 0;
         }
+      }
+      &.overview {
+        opacity: 0;
+        left: -40%;
       }
     }
     .enterPar-leave-active {
@@ -189,6 +165,10 @@ $mg: mix($bg, $bg2, 50%);
           opacity: 0;
         }
       }
+      &.overview {
+        opacity: 0;
+        right: -40%;
+      }
     }
     .enterPar-leave-active {
       animation: enterRight 0.5s cubic-bezier(1, 0.5, 0.8, 1) reverse;
@@ -201,22 +181,18 @@ $mg: mix($bg, $bg2, 50%);
 
 @keyframes enterLeft {
   0% {
-    //opacity: 0;
     left: -600px;
   }
   100% {
-    //opacity: 1;
     left: -20%;
   }
 }
 
 @keyframes enterRight {
   0% {
-    //opacity: 0;
     right: -600px;
   }
   100% {
-    //opacity: 1;
     right: -20%;
   }
 }

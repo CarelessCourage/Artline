@@ -44,7 +44,6 @@ $bg: #3d405b;
 $bg2: #f4f1de;
 $mg: mix($bg, $bg2, 50%);
 
-
 .author {
   position: absolute;
 }
@@ -68,7 +67,6 @@ h2 {
 
 .artickleContainer .box {
   cursor: pointer;
-  border-radius: 4em;
 
   display: flex;
   flex-direction: column;
@@ -80,37 +78,33 @@ h2 {
   max-width: 100vw;
   margin: auto;
 
-  padding: 2em;
-  box-sizing: border-box;
   position: relative;
-
   transition: 2s;
 
   &:hover .imgFrame {
     opacity: 0.7;
   }
   &::after {
-    transform: translateX(100px);
-    transition: 0.4s;
-    opacity: 0;
     content: "🠈";
-    text-align: center;
-    font-size: 3em !important;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    opacity: 0;
+    font-size: 3em;
     background: var(--details);
-    padding: 1em;
+
+    right: 2em;
+    height: 100%;
+    padding: 1vw;
     padding-top: 0em;
     padding-bottom: 0em;
-    //border-radius: 1em;
-    font-size: 0.8em;
-    height: 100%;
     text-align: center;
     position: absolute;
-    //bottom: -20px;
-    right: 0px;
     color: var(--bg);
+
+    transform: translateX(100px);
+    transition: 0.4s;
   }
   @media only screen and (max-width: 870px) {
     height: 10em;
@@ -173,15 +167,14 @@ h2 {
   height: 20em;
   border-radius: 0px;
   width: 100vw;
-  margin-top: 25vw;
   h1 {
-    //font-size: 9em;
     font-size: clamp(40px, 10vw, 15em);
     color: var(--special);
     opacity: 1;
   }
   &:hover::after {
     opacity: 1;
+    right: 0.4em;
     transform: translateX(0px);
   }
 }

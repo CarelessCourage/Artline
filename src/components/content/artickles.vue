@@ -11,12 +11,18 @@
       :key="index"
       :id="art.title"
     >
+      <div class="emptyClearance"></div>
       <ArtImage
         :art="art"
         @mouseover="onBox = index"
         @mouseleave="onBox = null"
       />
-      <HookParalax :art="art" :hoverOnBox="onBox !== index" />
+      <HookParalax
+        :art="art"
+        :hoverOnBox="onBox !== index"
+        :mode="mode"
+        v-if="true"
+      />
       <ArticleContent :art="art" :mode="mode" />
     </div>
   </div>
@@ -50,6 +56,12 @@ export default {
       return this.$store.state.mode;
     },
   },
+  watch: {
+    "$store.state.mode": function () {
+      //this.startParalax();
+      console.log("dooof");
+    },
+  },
   data: function () {
     return {
       onBox: null,
@@ -62,6 +74,7 @@ export default {
     this.startParalax();
     this.$store.dispatch("_resetGSAP");
   },
+
   methods: {
     getFontStyle(font) {
       let style = "--font: " + font + ";";
@@ -108,6 +121,7 @@ export default {
   position: relative;
   margin-top: 0em;
   margin-bottom: 0em;
+  transition: 0.4s ease-in-out;
   .text {
     transition: transform 1s;
     pointer-events: none;
@@ -128,18 +142,26 @@ export default {
   }
 }
 
+.emptyClearance {
+  height: 20em;
+  width: 100%;
+  transition: 0.4s ease-in-out;
+}
+
+.classic .emptyClearance {
+  height: 0em;
+}
+
 //classic
-.artickleContainer.classic {
-  &:hover {
-    @media only screen and (min-width: 870px) {
-      .box .text h1 {
-        font-size: 8em;
-      }
-      .imgFrame {
-        img {
-          width: 130%;
-          height: 130%;
-        }
+.artickleContainer.classic .box:hover {
+  @media only screen and (min-width: 870px) {
+    .text h1 {
+      font-size: 8em;
+    }
+    .imgFrame {
+      img {
+        width: 130%;
+        height: 130%;
       }
     }
   }
