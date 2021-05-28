@@ -105,38 +105,41 @@ export default {
 
 .art {
   max-height: 0em;
-  max-width: 100%;
-  width: 75em;
+  max-width: 75em;
+  width: 70%;
   margin: auto;
   box-sizing: border-box;
   transition: 1s;
+  @media only screen and (max-width: 600px) {
+    width: 100%;
+  }
   p {
     margin-top: 0px;
   }
   .intro {
+    margin: 0px;
     width: 25em;
     font-size: 5em;
-    font-size: clamp(35px, 5vw, 4em);
+    font-size: clamp(25px, 5vw, 4em);
     line-height: 1em;
     font-weight: 900;
     max-width: 100%;
     max-height: 100%;
     overflow: hidden;
-    margin: 0px;
     transform: translateY(0);
     transition: 1s ease-in-out;
 
     @media only screen and (max-width: 450px) {
       width: 100%;
     }
-    @media only screen and (max-width: 1000px) {
-      width: 70vw !important;
-      margin: auto;
-    }
     @media only screen and (max-width: 600px) {
       width: 85vw !important;
     }
+    @media only screen and (max-width: 1000px) {
+      width: 70vw !important;
+    }
   }
+
   img {
     width: 100%;
     height: 15em;
@@ -200,8 +203,8 @@ export default {
   padding-top: 0em;
   padding-bottom: 0.5em;
   .intro {
-    padding-top: 2em;
-    padding-bottom: 3em;
+    padding-top: 1em;
+    padding-bottom: 1.5em;
     overflow: hidden;
     opacity: 1;
   }

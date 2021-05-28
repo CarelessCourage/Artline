@@ -148,10 +148,9 @@ export default {
   padding: 1em;
   border-radius: 1em; 
   opacity: 0.7;
-  position: fixed;
   position: absolute;
   z-index: 20;
-  bottom: 3vw;
+  bottom: -3vw;
   left: 0px;
   right: 0px;
   width: 14em;
@@ -179,7 +178,7 @@ export default {
   p {
     margin: 0px;
     opacity: 0.5;
-    font-size: 1.5em;
+    font-size: clamp(.5em, 4vw, 1.5em);
     text-align: center;
   }
 }

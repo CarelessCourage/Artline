@@ -52,7 +52,7 @@ export default {
   }
   .tekst {
     margin-right: 1.5em;
-    margin-left: 11.5em;
+    margin-left: 7.5em;
     p {
       margin: 0px;
     }
@@ -67,8 +67,10 @@ export default {
   color: var(--details);
   padding-left: 0em;
   img {
-    width: 10em;
-    height: 10em;
+    width: 6em;
+    height: 6em;
+    max-width: 30vw;
+    max-height: 30vw;
   }
 }
 </style>

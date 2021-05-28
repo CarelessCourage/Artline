@@ -130,6 +130,12 @@ h2 {
   &.extra {
     width: 40em;
   }
+
+  @media only screen and (max-width: 1100px) {
+    h2 {
+      font-size: clamp(10px, 2vw, 2em);
+    }
+  }
 }
 
 .artickleContainer .imgFrame {
@@ -174,7 +180,7 @@ h2 {
   }
   &:hover::after {
     opacity: 1;
-    right: 0.4em;
+    right: 0em;
     transform: translateX(0px);
   }
 }
